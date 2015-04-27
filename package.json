@@ -1,0 +1,31 @@
+{
+  "name": "spdx-license-syncer",
+  "version": "0.0.1",
+  "description": "Generate your license file from package.json. Keep it updated each year :)",
+  "main": "index.js",
+  "dependencies": {
+    "spdx-license-list": "^1.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Laoujin/npm-spdx-license-syncer"
+  },
+  "keywords": [
+    "spdx",
+    "license",
+    "licence",
+    "generate",
+    "sync",
+    "synchronize"
+  ],
+  "author": "Wouter Van Schandevijl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Laoujin/npm-spdx-license-syncer/issues"
+  },
+  "homepage": "https://github.com/Laoujin/npm-spdx-license-syncer"
+}
