@@ -1,0 +1,26 @@
+{
+	"Apache-1.0": {
+		"family": "Apache"
+	},
+	"Apache-1.1": {
+		"family": "Apache"
+	},
+	"Apache-2.0": {
+		"family": "Apache",
+		"familyDefault": true,
+		"common": true
+	},
+	"MIT": {
+		"common": true
+	},
+	"GPL-2.0": {
+		"family": "GPL",
+		"familyDefault": true,
+		"common": true
+	},
+	"GPL-2.0": {
+		"family": "GPL",
+		"familyDefault": true,
+		"common": true
+	}
+}
