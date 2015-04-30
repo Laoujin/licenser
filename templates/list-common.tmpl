@@ -1,6 +1,7 @@
 A list of commonly used licenses
-
-Key: Name
-{%- for lic in licenses %}
-{{ lic.key }}: {{ lic.name }}
-{%- endfor %}
+{% for lic in licenses %}
+{{ lic.name }}
+{{ lic.motivation }}
+Key: {{ lic.key }}
+{% if opts.verbose %}{{ lic.desc }}{% endif %}
+{% endfor %}
