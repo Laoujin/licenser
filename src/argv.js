@@ -26,7 +26,7 @@ module.exports = function(args) {
 
 	nomnom.command('add')
 		.callback(function(opts) {
-			//commands.add(opts);
+			
 		})
 		.option('license', {
 			position: 0,
