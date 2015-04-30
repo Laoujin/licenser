@@ -7,7 +7,7 @@ var l = console.log.bind();
 
 //var fs = require('fs');
 var _ = require('lodash');
-//var colors = require('colors/safe');
+var colors = require('colors/safe');
 
 var licenseModelBuilder = require('./src/licenseModelBuilder.js');
 var licenses = licenseModelBuilder({
@@ -15,21 +15,34 @@ var licenses = licenseModelBuilder({
 	common: require('./licenses.json')
 });
 
+var opts = require('./src/argv.js')();
 
-var commands = {
-	list: licenseListPrinter
-};
+switch (opts._[0]) {
+case 'list':
+	var list = require('./src/lic/list.js')(licenses, opts);
+	if (opts.common) {
 
-require('./src/argv.js')(licenses, commands);
+	} else {
+		simpleLicenseListPrint(list, opts);
+	}
+	break;
 
-function licenseListPrinter(list, opts) {
+case 'add':
+	break;
+}
+
+function simpleLicenseListPrint(list, opts) {
 	var keys = Object.keys(list).sort();
 	_.forEach(keys, function(key) {
-		if (opts.verbose) {
-			console.log('so verbose');
+		var lic = list[key];
+		var str = key + ': ' + lic.name + (lic.osiApproved && opts.all ? ' (OSI Approved)' : '');
+
+		if (lic.common) {
+			console.log(colors.magenta(str));
+		} else if (lic.osiApproved) {
+			console.log(colors.green(str));
 		} else {
-			var lic = list[key];
-			console.log(key + ': ' + lic.name);
+			console.log(str);
 		}
 	});
 }
