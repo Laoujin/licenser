@@ -1,0 +1,5 @@
+{% if !config.license.valid %}
+{{ config.license.name }} is not a valid license!
+{% else %}
+Setting license: {{ config.license.name }}
+{% endif %}

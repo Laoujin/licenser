@@ -28,6 +28,7 @@ module.exports = function(args) {
 		.callback(function(opts) {
 			
 		})
+		.help('sets the license and adds the file')
 		.option('license', {
 			position: 0,
 			help: 'the license type'
