@@ -9,7 +9,7 @@ module.exports = function(licenses, commands, cli) {
 		nomnom.command('list')
 			.callback(function(opts) {
 				var list = require('./lic/list.js')(licenses, opts);
-				return commands.list(list);
+				return commands.list(list, opts);
 			})
 			.help('show licenses')
 			.option('common', {
@@ -55,19 +55,6 @@ module.exports = function(licenses, commands, cli) {
 
 		cli = nomnom.parse();
 	}
-
-	// console.log('args', cli);
-
-	// var args = {
-	// 	empty: _.size(cli) === 1
-	// };
-
-	
-
-	// if (!args.empty) {
-	// 	args.add = {};
-		
-	// }
 
 	return cli;
 };

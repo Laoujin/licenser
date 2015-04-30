@@ -16,20 +16,26 @@ var licenses = licenseModelBuilder({
 });
 
 
-function licenseListPrinter(list) {
-	var keys = Object.keys(list).sort();
-	_.forEach(keys, function(key) {
-		var lic = list[key];
-		console.log(key + ': ' + lic.name);
-	});
-}
-
-
 var commands = {
 	list: licenseListPrinter
 };
 
-var argv = require('./src/argv.js')(licenses, commands);
+require('./src/argv.js')(licenses, commands);
+
+function licenseListPrinter(list, opts) {
+	var keys = Object.keys(list).sort();
+	_.forEach(keys, function(key) {
+		if (opts.verbose) {
+			console.log('so verbose');
+		} else {
+			var lic = list[key];
+			console.log(key + ': ' + lic.name);
+		}
+	});
+}
+
+
+
 
 //var packageJson = require('./package.json');
 
@@ -82,16 +88,4 @@ var argv = require('./src/argv.js')(licenses, commands);
 
 //console.log(spdxLicenseList.MIT);
 //=> { name: 'MIT License', osiApproved: true }
-
-if (argv.add) {
-
-
-	// if (currentLicense) {
-
-	// }
-
-	// if () {
-
-	// }
-}
 
