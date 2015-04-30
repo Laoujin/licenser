@@ -32,6 +32,17 @@ var licenses = licenseModelBuilder({
 	common: require('./licenses.json')
 });
 
+// Current licensing data
+var config = require('./src/status.js');
+
+// Running without parameters
+// Print some general license info
+if (process.argv.length === 2) {
+	renderTemplate('status');
+	process.exit();
+}
+
+// Running with parameters
 // parse cli arguments
 var opts = require('./src/argv.js')();
 
@@ -54,8 +65,6 @@ case 'add':
 	//require('')();
 	addCommand();
 	break;
-
-default:
 }
 
 function simpleLicenseListPrint(list, opts) {
@@ -72,43 +81,11 @@ function simpleLicenseListPrint(list, opts) {
 	});
 }
 
-// no command: print current license & file status etc
 
-var fs = require('fs');
 function addCommand() {
-	var spdxlicenses = require('spdx-license-list');
-	var packageJson = require('./package.json');
-
-	var config = {
-		fileName: 'LICENSE',
-		fileExists: function() {
-			return fs.existsSync(this.fileName);
-		},
-		license: {
-			name: packageJson.license,
-			valid: spdxlicenses[packageJson.license] !== undefined
-		},
-		spdx: spdxlicenses[packageJson.license]
-	};
-
-	if (config.license.valid) {
-		config.license.osiApproved = config.spdx.osiApproved;
-	}
-
 	renderTemplate('add', config);
 	
 }
-
-// 		if (config.fileExists()) {
-// 			console.log('License file exists.');
-// 		} else {
-// 			console.log(colors.magenta('License file does not exist!'));
-// 		}
-
-		
-// 	}
-// }
-
 
 // if (argv.i) {
 // 	console.log('interactive');
