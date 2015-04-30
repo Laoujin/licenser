@@ -14,13 +14,55 @@
 		"common": true
 	},
 	"GPL-2.0": {
-		"family": "GPL",
+		"family": "GPL-2",
 		"familyDefault": true,
 		"common": true
 	},
-	"GPL-2.0": {
-		"family": "GPL",
+	"GPL-2.0+": {
+		"family": "GPL-2"
+	},
+	"GPL-2.0-with-autoconf-exception": {
+		"family": "GPL-2"
+	},
+	"GPL-2.0-with-bison-exception": {
+		"family": "GPL-2"
+	},
+	"GPL-2.0-with-classpath-exception": {
+		"family": "GPL-2"
+	},
+	"GPL-2.0-with-font-exception": {
+		"family": "GPL-2"
+	},
+	"GPL-2.0-with-GCC-exception": {
+		"family": "GPL-2"
+	},
+	"GPL-3.0": {
+		"family": "GPL-3",
 		"familyDefault": true,
 		"common": true
+	},
+	"GPL-3.0+": {
+		"family": "GPL-3"
+	},
+	"GPL-3.0-with-autoconf-exception": {
+		"family": "GPL-3"
+	},
+	"GPL-3.0-with-GCC-exception": {
+		"family": "GPL-3"
+	},
+	"LGPL-2.1": {
+		"family": "LGPL",
+		"familyDefault": true,
+		"common": true
+	},
+	"LGPL-2.1+": {
+		"family": "LGPL"
+	},
+	"LGPL-3.0": {
+		"family": "LGPL",
+		"common": true
+	},
+	"LGPL-3.0+": {
+		"family": "LGPL"
 	}
 }

@@ -9,10 +9,13 @@ module.exports = function(licenses, commands, cli) {
 		nomnom.command('list')
 			.callback(function(opts) {
 				var list = require('./lic/list.js')(licenses, opts);
-				console.log(opts, list);
 				return commands.list(list);
 			})
-			.help('show all common licenses')
+			.help('show licenses')
+			.option('common', {
+				flag: true,
+				help: 'show most common licenses (default)'
+			})
 			.option('all', {
 				flag: true,
 				abbr: 'a',
@@ -21,6 +24,11 @@ module.exports = function(licenses, commands, cli) {
 			.option('osi', {
 				flag: true,
 				help: 'show OSI approved licenses'
+			})
+			.option('verbose', {
+				abbr: 'v',
+				flag: true,
+				help: 'verbose output'
 			});
 
 		nomnom.command('add')

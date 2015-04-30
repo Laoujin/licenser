@@ -1,11 +1,13 @@
 'use strict';
 
+// Choosing an OSS license doesn’t need to be scary
+// http://choosealicense.com/
+
 var l = console.log.bind();
 
 //var fs = require('fs');
 var _ = require('lodash');
 //var colors = require('colors/safe');
-// var spdxlicenses = require('spdx-license-list');
 
 var licenseModelBuilder = require('./src/licenseModelBuilder.js');
 var licenses = licenseModelBuilder({
@@ -14,11 +16,11 @@ var licenses = licenseModelBuilder({
 });
 
 
-
-
 function licenseListPrinter(list) {
-	_.forEach(list, function(lic) {
-		console.log(lic.key + ': ' + lic.name);
+	var keys = Object.keys(list).sort();
+	_.forEach(keys, function(key) {
+		var lic = list[key];
+		console.log(key + ': ' + lic.name);
 	});
 }
 
