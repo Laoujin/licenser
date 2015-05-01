@@ -22,13 +22,6 @@ var _ = require('lodash');
 var colors = require('colors/safe');
 var swig = require('swig');
 
-// Combine license jsons
-var licenseModelBuilder = require('./src/licenseModelBuilder.js');
-var licenses = licenseModelBuilder({
-	spdx: require('spdx-license-list'),
-	common: require('./licenses.json')
-});
-
 // Current licensing data
 var status = require('./src/status.js');
 var config = status.getConfig();
@@ -37,6 +30,7 @@ var config = status.getConfig();
 // Print some general license info
 if (process.argv.length === 2) {
 	renderTemplate('header');
+	//l(config);
 	renderTemplate('status', config);
 	process.exit();
 }
@@ -48,7 +42,7 @@ var opts = require('./src/argv.js')();
 // decide what to do
 switch (opts._[0]) {
 case 'list':
-	var list = toArray(require('./src/lic/list.js')(licenses, opts));
+	var list = toArray(require('./src/lic/list.js')(config.licenses, opts));
 	if (opts.common) {
 		var model = {
 			opts: opts,
@@ -85,17 +79,21 @@ function addCommand() {
 	var newLicense = status.getDetails(opts.license);
 
 	if (!newLicense.valid) {
-		console.log(colors.magenta(newLicense.key +' is not a valid license!'));
+		console.log(colors.magenta(newLicense.key +' is not a recognized SPDX license!'));
 
 	} else {
 		console.log('Setting license: '+ newLicense.key);
-		if (!newLicense.spdx.osiApproved) {
+		if (!newLicense.osiApproved) {
 			console.log(colors.magenta('ATTN: You are setting a not OSI approved license!'));
 		}
 
-		if (config.license.key !== newLicense.key) {
-			console.log('Updating package.json');
-			config.updatePackageJson(newLicense.key);
+		if (config.hasNpmPackage) {
+			if (config.license.key !== newLicense.key) {
+				console.log('Updating package.json');
+				status.updatePackageJson(newLicense.key);
+			} else {
+				console.log('package.json up to date');
+			}
 		}
 	}
 }

@@ -2,7 +2,7 @@
   "name": "spdx-license-syncer",
   "version": "0.0.1",
   "description": "Generate your license file from package.json. Keep it updated each year :)",
-  "license": "",
+  "license": "MIT",
   "author": {
     "name": "Wouter Van Schandevijl",
     "email": "woutervs@hotmail.com",
@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "colors": "^1.1.0",
+    "json-file-plus": "^2.0.0",
     "lodash": "^3.7.0",
     "nomnom": "^1.8.1",
     "spdx-license-list": "^1.1.0",

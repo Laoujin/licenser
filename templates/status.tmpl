@@ -1,7 +1,12 @@
-{% if !config.license.key %}
+{% if !license.key %}
 No license has been set!
 Try `list` or `add GPL-2.0`
-{% else %}
-Your license: {{ config.license.key }}
-Because you {{ config.license.motivation.substr(2) }}
-{% endif %}
+{%- else %}
+Your license: {{ license.key }}
+{%- if !license.valid %}
+This license is not recognized by SPDX...
+{%- else %}
+{%- if license.motivation %}Because you {{ license.motivation.substr(2) }}{% endif %}
+{%- if !license.osiApproved %}This license is not OSI approved{% endif %}
+{%- endif %}
+{%- endif %}
