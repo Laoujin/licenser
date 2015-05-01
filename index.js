@@ -59,6 +59,10 @@ case 'list':
 	}
 	break;
 
+case 'print':
+	printCommand();
+	break;
+
 case 'set':
 	setCommand();
 	break;
@@ -74,7 +78,7 @@ function simpleLicensePrint(lic, addOsiApproved) {
 	var str = lic.key + ': ' + lic.name + (lic.osiApproved && addOsiApproved ? ' (OSI Approved)' : '');
 
 	if (lic.common) {
-		console.log(colors.magenta(str));
+		console.log(colors.magenta(str + ' <-- You might want to pick this one'));
 	} else if (lic.osiApproved) {
 		console.log(colors.green(str));
 	} else {
@@ -92,13 +96,7 @@ function setCommand() {
 	var newLicense = status.getDetails(licenseKey, true);
 	if (!newLicense.valid) {
 		console.log(colors.magenta(newLicense.key +' is not a recognized SPDX license!'));
-		if (matched.length > 1) {
-			console.log('Did you mean?');
-			_.forEach(matched, function(match) {
-				var licDetails = status.getDetails(match);
-				simpleLicensePrint(licDetails, true);
-			});
-		}
+		printCandidates(matched);
 
 	} else {
 		console.log('Setting license: '+ newLicense.key);
@@ -118,6 +116,26 @@ function setCommand() {
 			console.log('Overwriting existing license');
 		}
 		status.writeLicense(newLicense);
+	}
+}
+
+function printCommand() {
+	var list = status.getMatches(opts.key);
+	if (list.length !== 1) {
+		printCandidates(list);
+	} else {
+		var details = status.getDetails(list[0], true);
+		console.log(details.full);
+	}
+}
+
+function printCandidates(list) {
+	if (list.length > 1) {
+		console.log('Did you mean?');
+		_.forEach(list, function(match) {
+			var licDetails = status.getDetails(match);
+			simpleLicensePrint(licDetails, true);
+		});
 	}
 }
 

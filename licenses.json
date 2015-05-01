@@ -1,4 +1,34 @@
 {
+	"AFL-1.1": {
+		"alias": "^AFL[- ]?1[- .]1$",
+		"family": "AFL",
+		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
+		"replace": "Copyright (C) $years $author"
+	},
+	"AFL-1.2": {
+		"alias": "^AFL[- ]?1[- .]2$",
+		"family": "AFL",
+		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
+		"replace": "Copyright (C) $years $author"
+	},
+	"AFL-2.0": {
+		"alias": "^AFL[- ]?2$",
+		"family": "AFL",
+		"match": "Copyright \\(C\\) (:<years>2003) (:<author>Lawrence E. Rosen)",
+		"replace": "Copyright (C) $years $author"
+	},
+	"AFL-2.1": {
+		"alias": "^AFL[- ]?2[- .]1$",
+		"family": "AFL",
+		"match": "Copyright \\(C\\) (:<years>2003-2004) (:<author>Lawrence E. Rosen)",
+		"replace": "Copyright (C) $years $author"
+	},
+	"AFL-3.0": {
+		"alias": "^AFL[- ]?3$",
+		"family": "AFL",
+		"match": "Copyright © (:<years>2005) (:<author>Lawrence Rosen)",
+		"replace": "Copyright © $years $author"
+	},
 	"AGPL-1.0": {
 		"alias": "^AGPL[- ]?1$",
 		"family": "AGPL",
@@ -8,15 +38,17 @@
 	"AGPL-3.0": {
 		"alias": "^AGPL[- ]?3$",
 		"family": "AGPL",
-		"match": "Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
-		"replace": "Copyright © $years $author $url"
+		"clean": "",
+		"match": "",
+		"replace": "Copyright © $years $author $url",
+		"header": ""
 	},
 	"Apache-1.0": {
 		"alias": "^Apache[- ]?1$",
 		"family": "Apache"
 	},
 	"Apache-1.1": {
-		"alias": "^Apache[- ]1[- .]1$",
+		"alias": "^Apache[- ]?1[- .]1$",
 		"family": "Apache"
 	},
 	"Apache-2.0": {
@@ -26,7 +58,9 @@
 		"motivation": "I am concerned about patents.",
 		"desc": "The Apache License is a permissive license similar to the MIT License, but also provides an express grant of patent rights from contributors to users.\n\nApache, SVN, and NuGet use the Apache License.",
 		"match": "(?:[\\s\\S]*)Copyright (:<years>\\[yyyy\\]) (:<author>\\[name of copyright owner\\])",
-		"replace": "Copyright $years $author"
+		"replace": "Copyright $years $author",
+		"clean": "",
+		"header": ""
 	},
 	"BSD-2-Clause": {
 		"alias": "^BSD[- ]?2$",
@@ -126,7 +160,7 @@
 		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
 	},
 	"LGPL-2.1": {
-		"alias": "^LGPL[- ]2[- .]1$",
+		"alias": "^LGPL[- ]?2[- .]1$",
 		"family": "LGPL",
 		"common": false,
 		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"

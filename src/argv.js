@@ -34,6 +34,14 @@ module.exports = function(args, config) {
 			help: 'show OSI approved licenses'
 		});
 
+	nomnom.command('print')
+		.option('key', {
+			position: 1,
+			help: 'the license key',
+			required: true
+		})
+		.help('print a full license');
+
 	nomnom.command('set')
 		.callback(function(opts) {
 			
