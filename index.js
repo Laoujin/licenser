@@ -5,7 +5,7 @@
 //{% if loop.first %} class="first"{% endif %}>{{ author }}
 //console.log('\u001b[94mwhat tha fuck\u001b[0m');
 
-var l = console.log.bind();
+//var l = console.log.bind();
 
 
 // Creative Commons Attribution zitten ook in de spdx
@@ -21,7 +21,7 @@ var l = console.log.bind();
 var _ = require('lodash');
 var colors = require('colors/safe');
 var swig = require('swig');
-var fs = require('fs');
+//var fs = require('fs');
 
 // Current licensing data
 var status = require('./src/status.js');
@@ -64,23 +64,39 @@ case 'add':
 
 function simpleLicenseListPrint(list, opts) {
 	_.forEach(list, function(lic) {
-		var str = lic.key + ': ' + lic.name + (lic.osiApproved && opts.all ? ' (OSI Approved)' : '');
-
-		if (lic.common) {
-			console.log(colors.magenta(str));
-		} else if (lic.osiApproved) {
-			console.log(colors.green(str));
-		} else {
-			console.log(str);
-		}
+		simpleLicensePrint(lic, opts.all);
 	});
 }
 
-function addCommand() {
-	var newLicense = status.getDetails(opts.license, true);
+function simpleLicensePrint(lic, addOsiApproved) {
+	var str = lic.key + ': ' + lic.name + (lic.osiApproved && addOsiApproved ? ' (OSI Approved)' : '');
 
+	if (lic.common) {
+		console.log(colors.magenta(str));
+	} else if (lic.osiApproved) {
+		console.log(colors.green(str));
+	} else {
+		console.log(str);
+	}
+}
+
+function addCommand() {
+	var licenseKey = opts.license;
+	var matched = status.getMatches(licenseKey);
+	if (matched.length === 1) {
+		licenseKey = matched[0];
+	}
+
+	var newLicense = status.getDetails(licenseKey, true);
 	if (!newLicense.valid) {
 		console.log(colors.magenta(newLicense.key +' is not a recognized SPDX license!'));
+		if (matched.length > 1) {
+			console.log('Did you mean?');
+			_.forEach(matched, function(match) {
+				var licDetails = status.getDetails(match);
+				simpleLicensePrint(licDetails, true);
+			});
+		}
 
 	} else {
 		console.log('Setting license: '+ newLicense.key);
@@ -90,7 +106,6 @@ function addCommand() {
 
 		if (config.hasNpmPackage) {
 			if (config.license.key !== newLicense.key) {
-				console.log('Updating package.json');
 				status.updatePackageJson(newLicense.key);
 			} else {
 				console.log('package.json up to date');

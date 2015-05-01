@@ -31,7 +31,7 @@ var licenses = licenseModelBuilder({
 	common: require('../licenses.json')
 });
 
-//var commonlyUsedLinseFileNames = ['LICENSE', 'LICENSE.txt', 'LICENSE.md'];
+//var commonlyUsedLicenseFileNames = ['LICENSE', 'LICENSE.txt', 'LICENSE.md'];
 var globalConfig = {
 	fileName: 'LICENSE'
 };
@@ -53,16 +53,42 @@ module.exports = {
 
 		return config;
 	},
-	getDetails: function(license, full) {
+	getMatches: function(needle) {
+		needle = needle.toLowerCase();
+
+		var i;
+		var list = [];
+
+		var keys = Object.keys(licenses);
+		for (i = 0; i < keys.length; i++) {
+			if (needle === keys[i].toLowerCase()) {
+				return [keys[i]];
+			}
+
+			if (keys[i].toLowerCase().indexOf(needle) !== -1) {
+				list.push(keys[i]);
+			}
+
+			//var lic = licenses[keys[i]];
+			//|| lic.name.toLowerCase().indexOf(needle)
+		}
+
+		return list;
+	},
+	getDetails: function(licenseKey, full) {
 		full = full || false;
 
 		var lic = _.merge({
-			key: license,
-			valid: licenses[license] !== undefined
-		}, licenses[license]);
+			key: licenseKey,
+			valid: licenses[licenseKey] !== undefined
+		}, licenses[licenseKey]);
 
 		if (full && lic.valid) {
-			lic.full = fs.readFileSync(spdxLicensesPath + license +'.txt').toString();
+			try {
+				lic.full = fs.readFileSync(spdxLicensesPath + licenseKey +'.txt').toString();
+			} catch(err) {
+				console.log('Error reading ' + licenseKey + ' license content ', err);
+			}
 		}
 
 		return lic;
