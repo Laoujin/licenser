@@ -1,4 +1,16 @@
 {
+	"AGPL-1.0": {
+		"alias": "^AGPL[- ]?1$",
+		"family": "AGPL",
+		"match" : "Copyright © (:<years>2002) (:<author>Affero Inc. 510 Third Street - Suite 225, San Francisco, CA 94107, USA)",
+		"replace": "Copyright © $years $author"
+	},
+	"AGPL-3.0": {
+		"alias": "^AGPL[- ]?3$",
+		"family": "AGPL",
+		"match": "Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
+		"replace": "Copyright © $years $author $url"
+	},
 	"Apache-1.0": {
 		"alias": "^Apache[- ]?1$",
 		"family": "Apache"
@@ -50,14 +62,6 @@
 		"match": "Copyright \\(c\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
 		"replace": "Copyright (c) $years $author"
 	},
-	"GPL-2.0": {
-		"alias": "^GPL[- ]?2$",
-		"family": "GPL",
-		"common": true,
-		"motivation": "I care about sharing improvements.",
-		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL.",
-		"clean": "\\nHow to Apply These Terms to Your New Libraries[\\s\\S]*"
-	},
 	"GPL-1.0+": {
 		"family": "GPL",
 		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
@@ -65,10 +69,19 @@
 	"GPL-1.0": {
 		"alias": "^GPL[- ]?1$",
 		"family": "GPL",
-		"clean": "Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
+	},
+	"GPL-2.0": {
+		"alias": "^GPL[- ]?2$",
+		"family": "GPL",
+		"common": true,
+		"motivation": "I care about sharing improvements.",
+		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL.",
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
 	},
 	"GPL-2.0+": {
-		"family": "GPL"
+		"family": "GPL",
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
 	},
 	"GPL-2.0-with-autoconf-exception": {
 		"family": "GPL"
@@ -89,10 +102,12 @@
 		"alias": "^GPL[- ]?3$",
 		"family": "GPL",
 		"common": true,
-		"motivation": "I care about sharing improvements."
+		"motivation": "I care about sharing improvements.",
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
 	},
 	"GPL-3.0+": {
-		"family": "GPL"
+		"family": "GPL",
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
 	},
 	"GPL-3.0-with-autoconf-exception": {
 		"family": "GPL"
@@ -100,6 +115,7 @@
 	"GPL-3.0-with-GCC-exception": {
 		"family": "GPL"
 	},
+
 
 	"LGPL-2.0": {
 		"family": "LGPL",

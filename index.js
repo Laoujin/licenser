@@ -17,6 +17,9 @@
 
 //process.exit();
 
+// headers for licenses?
+//https://github.com/lisposter/license-gen/blob/master/lib/license_tpl.json
+
 
 var _ = require('lodash');
 var colors = require('colors/safe');
@@ -56,8 +59,8 @@ case 'list':
 	}
 	break;
 
-case 'add':
-	addCommand();
+case 'set':
+	setCommand();
 	break;
 }
 
@@ -79,7 +82,7 @@ function simpleLicensePrint(lic, addOsiApproved) {
 	}
 }
 
-function addCommand() {
+function setCommand() {
 	var licenseKey = opts.license;
 	var matched = status.getMatches(licenseKey);
 	if (matched.length === 1) {
