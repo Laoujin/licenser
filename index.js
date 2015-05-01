@@ -29,9 +29,8 @@ var config = status.getConfig();
 
 // Running without parameters
 // Print some general license info
+renderTemplate('header');
 if (process.argv.length === 2) {
-	renderTemplate('header');
-	//l(config);
 	renderTemplate('status', config);
 	process.exit();
 }
@@ -101,7 +100,7 @@ function addCommand() {
 	} else {
 		console.log('Setting license: '+ newLicense.key);
 		if (!newLicense.osiApproved) {
-			console.log(colors.magenta('ATTN: You are setting a not OSI approved license!'));
+			console.log(colors.magenta('ATTN: You are setting a non OSI approved license!'));
 		}
 
 		if (config.hasNpmPackage) {

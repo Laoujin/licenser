@@ -34,8 +34,15 @@ function getCurrentAuthor() {
 	};
 }
 
+function getCurrentProject() {
+	return {
+		url: 'httpsomething'
+	};
+}
+
 var currentLicense = packageJson ? packageJson.license : '';
 var currentAuthor = getCurrentAuthor();
+var currentProject = getCurrentProject();
 
 // Combine license jsons
 var licenseModelBuilder = require('./licenseModelBuilder.js');
@@ -85,9 +92,6 @@ module.exports = {
 					return [keys[i]];
 				}
 			}
-			if (lic.alias) {
-				console.log(needle, lic.alias, needle.match(lic.alias));
-			}
 
 			if (keys[i].toLowerCase().indexOf(needle) !== -1) {
 				list.push(keys[i]);
@@ -114,6 +118,9 @@ module.exports = {
 		if (full && lic.valid) {
 			try {
 				lic.full = fs.readFileSync(spdxLicensesPath + licenseKey +'.txt').toString();
+				if (lic.clean) {
+					lic.full = lic.full.replace(new RegExp(lic.clean), '');
+				}
 			} catch(err) {
 				console.log('Error reading ' + licenseKey + ' license content ', err);
 			}
@@ -147,7 +154,9 @@ module.exports = {
 				//console.log('matched', matched.captures);
 				return license.replace
 					.replace('$years', new Date().getFullYear())
-					.replace('$author', currentAuthor.name);
+					.replace('$author', currentAuthor.name)
+					.replace('$email', currentAuthor.email)
+					.replace('$url', currentProject.url);
 			});
 
 			//console.log("captured:", matched);

@@ -1,12 +1,14 @@
 {
 	"Apache-1.0": {
+		"alias": "^Apache[- ]?1$",
 		"family": "Apache"
 	},
 	"Apache-1.1": {
+		"alias": "^Apache[- ]1[- .]1$",
 		"family": "Apache"
 	},
 	"Apache-2.0": {
-		"alias": "Apache[- ]2",
+		"alias": "^Apache[- ]?2$",
 		"family": "Apache",
 		"common": true,
 		"motivation": "I am concerned about patents.",
@@ -15,25 +17,55 @@
 		"replace": "Copyright $years $author"
 	},
 	"BSD-2-Clause": {
-		"alias": "BSD[- ]2",
+		"alias": "^BSD[- ]?2$",
 		"family": "BSD",
-		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<authors><OWNER>)",
+		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<author><OWNER>)",
 		"replace": "Copyright (c) $years $author"
+	},
+	"BSD-3-Clause": {
+		"alias": "^BSD[- ]?3$",
+		"family": "BSD",
+		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<author><OWNER>)",
+		"replace": "Copyright (c) $years $author"
+	},
+	"BSD-4-Clause": {
+		"alias": "^BSD[- ]?4$",
+		"family": "BSD",
+		"match": "Copyright \\(c\\) (:<years><year>), (:<author><copyright holder>)",
+		"replace": "Copyright (c) $years $author"
+	},
+	"ISC": {
+		"match": "(?:[\\s\\S]*)(:<years>1995-2003) by (:<author>Internet Software Consortium)",
+		"replace": "ISC License:\n\nCopyright (c) $years by $author"
+	},
+	"WTFPL": {
+		"match": "Copyright \\(C\\) (:<years><YEAR>), (:<author><OWNER>)",
+		"replace": "Copyright (C) $years $author $email"
 	},
 	"MIT": {
 		"family": "MIT",
 		"common": true,
 		"motivation": "I want it simple and permissive",
 		"desc": "The MIT License is a permissive license that is short and to the point. It lets people do anything they want with your code as long as they provide attribution back to you and don’t hold you liable.\n\njQuery and Rails use the MIT License.",
-		"match": "Copyright \\(c\\) (:<years><year>) (:<author><copyright holders>)",
+		"match": "Copyright \\(c\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
 		"replace": "Copyright (c) $years $author"
 	},
 	"GPL-2.0": {
-		"alias": "GPL[- ]2",
+		"alias": "^GPL[- ]?2$",
 		"family": "GPL",
 		"common": true,
 		"motivation": "I care about sharing improvements.",
-		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL."
+		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL.",
+		"clean": "\\nHow to Apply These Terms to Your New Libraries[\\s\\S]*"
+	},
+	"GPL-1.0+": {
+		"family": "GPL",
+		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
+	},
+	"GPL-1.0": {
+		"alias": "^GPL[- ]?1$",
+		"family": "GPL",
+		"clean": "Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
 	},
 	"GPL-2.0+": {
 		"family": "GPL"
@@ -54,7 +86,7 @@
 		"family": "GPL"
 	},
 	"GPL-3.0": {
-		"alias": "GPL[- ]3",
+		"alias": "^GPL[- ]?3$",
 		"family": "GPL",
 		"common": true,
 		"motivation": "I care about sharing improvements."
@@ -68,20 +100,35 @@
 	"GPL-3.0-with-GCC-exception": {
 		"family": "GPL"
 	},
-	"LGPL-2.1": {
-		"alias": "LGPL[- ]2[- .]1",
+
+	"LGPL-2.0": {
 		"family": "LGPL",
-		"common": false
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+	},
+	"LGPL-2.0+": {
+		"family": "LGPL",
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+	},
+	"LGPL-2.1": {
+		"alias": "^LGPL[- ]2[- .]1$",
+		"family": "LGPL",
+		"common": false,
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
 	},
 	"LGPL-2.1+": {
-		"family": "LGPL"
+		"family": "LGPL",
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
 	},
 	"LGPL-3.0": {
-		"alias": "LGPL[- ]3",
+		"alias": "^LGPL[- ]?3$",
 		"family": "LGPL",
-		"common": false
+		"common": false,
+		"match": "Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
+		"replace": "Copyright (C) $years $author $url"
 	},
 	"LGPL-3.0+": {
-		"family": "LGPL"
+		"family": "LGPL",
+		"match": " Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
+		"replace": "Copyright (C) $years $author $url"
 	}
 }
