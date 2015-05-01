@@ -78,10 +78,20 @@ module.exports = {
 				return [keys[i]];
 			}
 
+			var lic = licenses[keys[i]];
+			if (lic.alias) {
+				var aliasRegex = new RegExp(lic.alias, 'i');
+				if (needle.match(aliasRegex)) {
+					return [keys[i]];
+				}
+			}
+			if (lic.alias) {
+				console.log(needle, lic.alias, needle.match(lic.alias));
+			}
+
 			if (keys[i].toLowerCase().indexOf(needle) !== -1) {
 				list.push(keys[i]);
 			} else {
-				var lic = licenses[keys[i]];
 				if (lic.name.toLowerCase().indexOf(needle) !== -1) {
 					descMatches.push(keys[i]);
 				}
@@ -131,7 +141,7 @@ module.exports = {
 
 		if (license.match) {
 			var named = require('named-regexp').named;
-			var re = named(new RegExp(license.match));
+			var re = named(new RegExp(license.match, 'g'));
 
 			customLicense = re.replace(customLicense, function(matched) {
 				//console.log('matched', matched.captures);

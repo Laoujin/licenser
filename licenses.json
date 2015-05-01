@@ -6,10 +6,19 @@
 		"family": "Apache"
 	},
 	"Apache-2.0": {
+		"alias": "Apache[- ]2",
 		"family": "Apache",
 		"common": true,
 		"motivation": "I am concerned about patents.",
-		"desc": "The Apache License is a permissive license similar to the MIT License, but also provides an express grant of patent rights from contributors to users.\n\nApache, SVN, and NuGet use the Apache License."
+		"desc": "The Apache License is a permissive license similar to the MIT License, but also provides an express grant of patent rights from contributors to users.\n\nApache, SVN, and NuGet use the Apache License.",
+		"match": "(?:[\\s\\S]*)Copyright (:<years>\\[yyyy\\]) (:<author>\\[name of copyright owner\\])",
+		"replace": "Copyright $years $author"
+	},
+	"BSD-2-Clause": {
+		"alias": "BSD[- ]2",
+		"family": "BSD",
+		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<authors><OWNER>)",
+		"replace": "Copyright (c) $years $author"
 	},
 	"MIT": {
 		"family": "MIT",
@@ -20,6 +29,7 @@
 		"replace": "Copyright (c) $years $author"
 	},
 	"GPL-2.0": {
+		"alias": "GPL[- ]2",
 		"family": "GPL",
 		"common": true,
 		"motivation": "I care about sharing improvements.",
@@ -44,6 +54,7 @@
 		"family": "GPL"
 	},
 	"GPL-3.0": {
+		"alias": "GPL[- ]3",
 		"family": "GPL",
 		"common": true,
 		"motivation": "I care about sharing improvements."
@@ -58,6 +69,7 @@
 		"family": "GPL"
 	},
 	"LGPL-2.1": {
+		"alias": "LGPL[- ]2[- .]1",
 		"family": "LGPL",
 		"common": false
 	},
@@ -65,6 +77,7 @@
 		"family": "LGPL"
 	},
 	"LGPL-3.0": {
+		"alias": "LGPL[- ]3",
 		"family": "LGPL",
 		"common": false
 	},
