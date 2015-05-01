@@ -10,6 +10,7 @@ var packageJsonPath = path.join(process.cwd(), 'package.json');
 
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
+// read node package.json
 var packageJson;
 if (fs.existsSync(packageJsonPath)) {
 	try {
@@ -22,7 +23,19 @@ if (fs.existsSync(packageJsonPath)) {
 	}
 }
 
+function getCurrentAuthor() {
+	if (packageJson) {
+		return packageJson.author;
+	}
+	return {
+		name: '',
+		email: '',
+		url: ''
+	};
+}
+
 var currentLicense = packageJson ? packageJson.license : '';
+var currentAuthor = getCurrentAuthor();
 
 // Combine license jsons
 var licenseModelBuilder = require('./licenseModelBuilder.js');
@@ -105,6 +118,7 @@ module.exports = {
 			});
 
 			file.save(function(err) {
+
 			}).then(function () {
 				console.log('Node package.json updated!');
 			}).catch(function (err) {
@@ -113,8 +127,30 @@ module.exports = {
 		});
 	},
 	writeLicense: function(license) {
+		var customLicense = license.full;
+
+		if (license.match) {
+			var named = require('named-regexp').named;
+			var re = named(new RegExp(license.match));
+
+			customLicense = re.replace(customLicense, function(matched) {
+				//console.log('matched', matched.captures);
+				return license.replace
+					.replace('$years', new Date().getFullYear())
+					.replace('$author', currentAuthor.name);
+			});
+
+			//console.log("captured:", matched);
+
+			//
+			//console.log(matched.captures); //=> { foo: [ 'aaa', 'bbb' ], bar: [ 'ccc' ] }
+			//console.log(matched.capture('foo')); //=> 'bbb' // last matched
+
+			//currentAuthor.name / email / url
+		}
+
 		try {
-			fs.writeFileSync(filePath, license.full, 'utf8');
+			fs.writeFileSync(filePath, customLicense, 'utf8');
 			console.log(globalConfig.fileName + ' created');
 		} catch(err) {
 			console.log('Error writing license file', err);

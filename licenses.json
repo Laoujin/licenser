@@ -15,7 +15,9 @@
 		"family": "MIT",
 		"common": true,
 		"motivation": "I want it simple and permissive",
-		"desc": "The MIT License is a permissive license that is short and to the point. It lets people do anything they want with your code as long as they provide attribution back to you and don’t hold you liable.\n\njQuery and Rails use the MIT License."
+		"desc": "The MIT License is a permissive license that is short and to the point. It lets people do anything they want with your code as long as they provide attribution back to you and don’t hold you liable.\n\njQuery and Rails use the MIT License.",
+		"match": "Copyright \\(c\\) (:<years><year>) (:<author><copyright holders>)",
+		"replace": "Copyright (c) $years $author"
 	},
 	"GPL-2.0": {
 		"family": "GPL",
