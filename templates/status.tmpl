@@ -1,7 +1,7 @@
-{% if !config.license.name %}
+{% if !config.license.key %}
 No license has been set!
 Try `list` or `add GPL-2.0`
 {% else %}
-Your license: {{ config.license.name }}
+Your license: {{ config.license.key }}
 Because you {{ config.license.motivation.substr(2) }}
 {% endif %}

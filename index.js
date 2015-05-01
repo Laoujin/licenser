@@ -18,12 +18,9 @@ var l = console.log.bind();
 //process.exit();
 
 
-
 var _ = require('lodash');
 var colors = require('colors/safe');
-var swig  = require('swig');
-
-renderTemplate('header');
+var swig = require('swig');
 
 // Combine license jsons
 var licenseModelBuilder = require('./src/licenseModelBuilder.js');
@@ -33,12 +30,14 @@ var licenses = licenseModelBuilder({
 });
 
 // Current licensing data
-var config = require('./src/status.js');
+var status = require('./src/status.js');
+var config = status.getConfig();
 
 // Running without parameters
 // Print some general license info
 if (process.argv.length === 2) {
-	renderTemplate('status');
+	renderTemplate('header');
+	renderTemplate('status', config);
 	process.exit();
 }
 
@@ -56,13 +55,14 @@ case 'list':
 			licenses: list
 		};
 		renderTemplate('list-common', model);
+
 	} else {
+		console.log();
 		simpleLicenseListPrint(list, opts);
 	}
 	break;
 
 case 'add':
-	//require('')();
 	addCommand();
 	break;
 }
@@ -81,10 +81,23 @@ function simpleLicenseListPrint(list, opts) {
 	});
 }
 
-
 function addCommand() {
-	renderTemplate('add', config);
-	
+	var newLicense = status.getDetails(opts.license);
+
+	if (!newLicense.valid) {
+		console.log(colors.magenta(newLicense.key +' is not a valid license!'));
+
+	} else {
+		console.log('Setting license: '+ newLicense.key);
+		if (!newLicense.spdx.osiApproved) {
+			console.log(colors.magenta('ATTN: You are setting a not OSI approved license!'));
+		}
+
+		if (config.license.key !== newLicense.key) {
+			console.log('Updating package.json');
+			config.updatePackageJson(newLicense.key);
+		}
+	}
 }
 
 // if (argv.i) {

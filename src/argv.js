@@ -2,7 +2,7 @@
 //var _ = require('lodash');
 var nomnom = require('nomnom');
 
-module.exports = function(args) {
+module.exports = function(args, config) {
 	nomnom.command('list')
 		.callback(function(opts) {
 			if (!opts.all && !opts.osi) {
@@ -30,8 +30,9 @@ module.exports = function(args) {
 		})
 		.help('sets the license and adds the file')
 		.option('license', {
-			position: 0,
-			help: 'the license type'
+			position: 1,
+			help: 'the license key',
+			required: true
 		})
 		.option('author', {
 			abbr: 'auth',

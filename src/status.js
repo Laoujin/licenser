@@ -3,22 +3,43 @@
 // Get current license & file status etc
 var fs = require('fs');
 var spdxlicenses = require('spdx-license-list');
-var packageJson = require('../package.json');
+var packageJsonPath = '../package.json';
+var packageJson = require(packageJsonPath);
 
-var config = {
-	fileName: 'LICENSE',
-	fileExists: function() {
-		return fs.existsSync(this.fileName);
+module.exports = {
+	getConfig: function() {
+		var config = {
+			fileName: 'LICENSE',
+			fileExists: function() {
+				return fs.existsSync(this.fileName);
+			},
+			license: this.getDetails(packageJson.license)
+		};
+
+		return config;
 	},
-	license: {
-		name: packageJson.license,
-		valid: spdxlicenses[packageJson.license] !== undefined
+	getDetails: function(license) {
+		return {
+			key: license,
+			valid: spdxlicenses[license] !== undefined,
+			spdx: spdxlicenses[license]
+		};
 	},
-	spdx: spdxlicenses[packageJson.license]
+	updateConfig: function(licenseKey) {
+		//packageJson.license = licenseKey;
+		//JSON.stringify(packageJson, null, 4);
+		fs.readFile(packageJsonPath, 'utf8', function (err, data) {
+			if (err) {
+				return console.log(err);
+			}
+			var current = '"license"\\s*:\\s*"'+packageJson.license+'"';
+			var result = data.replace(current, '"license": "'+licenseKey+'"');
+
+			fs.writeFile(packageJsonPath, result, 'utf8', function (err) {
+				 if (err) {
+				 	return console.log(err);
+				 }
+			});
+		});
+	}
 };
-
-if (config.license.valid) {
-	config.license.osiApproved = config.spdx.osiApproved;
-}
-
-module.exports = config;
