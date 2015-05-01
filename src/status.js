@@ -31,7 +31,6 @@ var licenses = licenseModelBuilder({
 	common: require('../licenses.json')
 });
 
-//var commonlyUsedLicenseFileNames = ['LICENSE', 'LICENSE.txt', 'LICENSE.md'];
 var globalConfig = {
 	fileName: 'LICENSE'
 };
@@ -58,6 +57,7 @@ module.exports = {
 
 		var i;
 		var list = [];
+		var descMatches = [];
 
 		var keys = Object.keys(licenses);
 		for (i = 0; i < keys.length; i++) {
@@ -67,12 +67,17 @@ module.exports = {
 
 			if (keys[i].toLowerCase().indexOf(needle) !== -1) {
 				list.push(keys[i]);
+			} else {
+				var lic = licenses[keys[i]];
+				if (lic.name.toLowerCase().indexOf(needle) !== -1) {
+					descMatches.push(keys[i]);
+				}
 			}
-
-			//var lic = licenses[keys[i]];
-			//|| lic.name.toLowerCase().indexOf(needle)
 		}
 
+		if (list.length === 0) {
+			return descMatches;
+		}
 		return list;
 	},
 	getDetails: function(licenseKey, full) {
