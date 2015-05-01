@@ -21,6 +21,7 @@ var l = console.log.bind();
 var _ = require('lodash');
 var colors = require('colors/safe');
 var swig = require('swig');
+var fs = require('fs');
 
 // Current licensing data
 var status = require('./src/status.js');
@@ -76,7 +77,7 @@ function simpleLicenseListPrint(list, opts) {
 }
 
 function addCommand() {
-	var newLicense = status.getDetails(opts.license);
+	var newLicense = status.getDetails(opts.license, true);
 
 	if (!newLicense.valid) {
 		console.log(colors.magenta(newLicense.key +' is not a recognized SPDX license!'));
@@ -95,6 +96,12 @@ function addCommand() {
 				console.log('package.json up to date');
 			}
 		}
+
+		if (config.fileExists()) {
+			console.log('Overwriting existing license');
+		}
+
+		status.writeLicense(newLicense);
 	}
 }
 

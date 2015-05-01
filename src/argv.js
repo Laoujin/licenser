@@ -1,5 +1,4 @@
 'use strict';
-//var _ = require('lodash');
 var nomnom = require('nomnom');
 
 module.exports = function(args, config) {
@@ -41,11 +40,6 @@ module.exports = function(args, config) {
 		.option('year', {
 			help: 'year to place in the license',
 			default: new Date().getFullYear()
-		})
-		.option('force', {
-			abbr: 'f',
-			flag: true,
-			help: 'overwrite existing license'
 		});
 
 	var opts = nomnom.parse(args);
