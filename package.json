@@ -1,8 +1,8 @@
 {
-  "name": "spdx-license-syncer",
+  "name": "licenser",
   "version": "0.0.1",
-  "description": "Generate your license file from package.json. Keep it updated each year :)",
-  "license": "AGPL-3.0",
+  "description": "Generate any SPDX license file with details from your package.json. Keep it updated each year :)",
+  "license": "GPL-2.0",
   "author": {
     "name": "Wouter Van Schandevijl",
     "email": "woutervs@hotmail.com",

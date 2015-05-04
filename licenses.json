@@ -41,7 +41,7 @@
 		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
-		"header": "<one line to give the program's name and a brief idea of what it does.>((\\n    .*)|\\n)*",
+		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
 		"headerClean": "^    "
 	},
 	"Apache-1.0": {
@@ -204,12 +204,20 @@
 	},
 	"GPL-1.0+": {
 		"family": "GPL",
-		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years>19yy)  (:<author><name of author>)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
+		"headerClean": "^    "
 	},
 	"GPL-1.0": {
 		"alias": "^GPL[- ]?1$",
 		"family": "GPL",
-		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*Appendix: How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years>19yy) (:<author><name of author>)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "<one line to give the program's name and a brief idea of what it does.>.*([\\r\\n]+    .*)*",
+		"headerClean": "^     "
 	},
 	"GPL-2.0": {
 		"alias": "^GPL[- ]?2$",
@@ -217,11 +225,17 @@
 		"common": true,
 		"motivation": "I care about sharing improvements.",
 		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL.",
-		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the program's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+If the program is interactive)"
 	},
 	"GPL-2.0+": {
 		"family": "GPL",
-		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the program's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+If the program is interactive)"
 	},
 	"GPL-2.0-with-autoconf-exception": {
 		"family": "GPL"

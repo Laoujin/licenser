@@ -37,7 +37,9 @@ function getCurrentAuthor() {
 
 function getCurrentProject() {
 	return {
-		url: 'httpsomething'
+		name: packageJson.name,
+		desc: packageJson.description,
+		url: packageJson.repository ? packageJson.repository.url : undefined
 	};
 }
 
@@ -124,7 +126,7 @@ module.exports = {
 				if (lic.header) {
 					lic.header = new RegExp(lic.header).exec(lic.full)[0];
 					if (lic.headerClean) {
-						lic.header = lic.header.replace(new RegExp(lic.headerClean), '');
+						lic.header = lic.header.replace(new RegExp(lic.headerClean, 'mg'), '');
 					}
 				}
 
@@ -166,7 +168,8 @@ module.exports = {
 					.replace('$years', new Date().getFullYear())
 					.replace('$author', currentAuthor.name)
 					.replace('$email', currentAuthor.email)
-					.replace('$url', currentProject.url);
+					.replace('$url', currentProject.url)
+					.replace('$project', currentProject.name + ' - ' + currentProject.desc);
 			});
 
 			//console.log("captured:", matched);
