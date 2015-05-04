@@ -1,18 +1,9 @@
+#!/usr/bin/env node
 'use strict';
-
-// npm set init.author.name "Brent Ertz"
-// npm set init.author.email "brent.ertz@gmail.com"
-// npm set init.author.url "http://brentertz.com"
-//npm adduser
-
-// headers for licenses?
-//https://github.com/lisposter/license-gen/blob/master/lib/license_tpl.json
-
 
 var _ = require('lodash');
 var colors = require('colors/safe');
 var swig = require('swig');
-//var fs = require('fs');
 
 // Current licensing data
 var status = require('./src/status.js');

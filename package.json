@@ -13,7 +13,7 @@
     "url": "https://github.com/Laoujin"
   },
   "bin": {
-    "licenser": "index.js"
+    "licenser": "./index.js"
   },
   "files": [
     "index.js",
