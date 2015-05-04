@@ -55,13 +55,13 @@
 	"Apache-2.0": {
 		"alias": "^Apache[- ]?2$",
 		"family": "Apache",
+		"clean": "\\s*APPENDIX: How to apply the Apache License to your work.[\\s\\S]*",
 		"common": true,
 		"motivation": "I am concerned about patents.",
 		"desc": "The Apache License is a permissive license similar to the MIT License, but also provides an express grant of patent rights from contributors to users.\n\nApache, SVN, and NuGet use the Apache License.",
-		"match": "(?:[\\s\\S]*)Copyright (:<years>\\[yyyy\\]) (:<author>\\[name of copyright owner\\])",
+		"match": "Copyright (:<years>\\[yyyy\\]) (:<author>\\[name of copyright owner\\])",
 		"replace": "Copyright $years $author",
-		"clean": "",
-		"header": ""
+		"header": ".*\\s*Licensed under the Apache License[\\s\\S]*"
 	},
 	"APL-1.0": {
 		"alias": "^APL[- ]?1$"
@@ -85,7 +85,7 @@
 	"Artistic-1.0-cl8": {
 		"family": "Artistic"
 	},
-	"Artistic-1.0-perl": {
+	"Artistic-1.0-Perl": {
 		"family": "Artistic"
 	},
 	"Artistic-1.0": {
@@ -181,6 +181,26 @@
 	"MPL-2.0": {
 		"alias": "^MPL[- ]?2$",
 		"family": "MPL"
+	},
+	"OSL-1.0": {
+		"alias": "^OSL[- ]?1$",
+		"family": "OSL"
+	},
+	"OSL-1.1": {
+		"alias": "^OSL[- ]?1[- .]1$",
+		"family": "OSL"
+	},
+	"OSL-2.0": {
+		"alias": "^OSL[- ]?2$",
+		"family": "OSL"
+	},
+	"OSL-2.1": {
+		"alias": "^OSL[- ]?1[- .]1$",
+		"family": "OSL"
+	},
+	"OSL-3.0": {
+		"alias": "^OSL[- ]?3$",
+		"family": "OSL"
 	},
 	"GPL-1.0+": {
 		"family": "GPL",

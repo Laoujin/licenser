@@ -40,6 +40,10 @@ module.exports = function(args, config) {
 			help: 'the license key',
 			required: true
 		})
+		.option('header', {
+			flag: true,
+			help: 'show the license header instead of the full license (For licenses like Apache-2.0, GPL-2.0+ etc a smallish header can be included instead of the entire license text)'
+		})
 		.help('print a full license');
 
 	nomnom.command('set')
@@ -55,6 +59,9 @@ module.exports = function(args, config) {
 		.option('author', {
 			abbr: 'auth',
 			help: 'name to place in the license'
+		})
+		.option('full', {
+			flag: true
 		})
 		.option('year', {
 			help: 'year to place in the license',

@@ -115,7 +115,7 @@ function setCommand() {
 		if (config.fileExists()) {
 			console.log('Overwriting existing license');
 		}
-		status.writeLicense(newLicense);
+		status.writeLicense(newLicense, opts.full);
 	}
 }
 
@@ -125,7 +125,11 @@ function printCommand() {
 		printCandidates(list);
 	} else {
 		var details = status.getDetails(list[0], true);
-		console.log(details.full);
+		if (opts.header && details.header) {
+			console.log(details.header);
+		} else {
+			console.log(details.full);
+		}
 	}
 }
 

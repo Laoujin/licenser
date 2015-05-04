@@ -7,6 +7,7 @@ var fs = require('fs');
 var path = require('path');
 var jsonFile = require('json-file-plus');
 var packageJsonPath = path.join(process.cwd(), 'package.json');
+var assert = require('assert');
 
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
@@ -96,6 +97,7 @@ module.exports = {
 			if (keys[i].toLowerCase().indexOf(needle) !== -1) {
 				list.push(keys[i]);
 			} else {
+				assert(lic.name !== undefined, "lic.name undefined. (means a licenses.json key that does not exist in the spdx json)", lic);
 				if (lic.name.toLowerCase().indexOf(needle) !== -1) {
 					descMatches.push(keys[i]);
 				}
@@ -118,6 +120,14 @@ module.exports = {
 		if (full && lic.valid) {
 			try {
 				lic.full = fs.readFileSync(spdxLicensesPath + licenseKey +'.txt').toString();
+
+				if (lic.header) {
+					lic.header = new RegExp(lic.header).exec(lic.full)[0];
+					if (lic.headerClean) {
+						lic.header = lic.header.replace(new RegExp(lic.headerClean), '');
+					}
+				}
+
 				if (lic.clean) {
 					lic.full = lic.full.replace(new RegExp(lic.clean), '');
 				}
@@ -143,8 +153,8 @@ module.exports = {
 			});
 		});
 	},
-	writeLicense: function(license) {
-		var customLicense = license.full;
+	writeLicense: function(license, useFullTextInsteadOfHeader) {
+		var customLicense = license.header && !useFullTextInsteadOfHeader ? license.header : license.full;
 
 		if (license.match) {
 			var named = require('named-regexp').named;
