@@ -338,5 +338,21 @@
 	},
 	"OPL-1.0": {
 		"alias": "^OPL[- ]?1?$"
+	},
+	"CC-BY-1.0": {
+		"alias": "^CC-BY[- ]?1$",
+		"family": "CreativeCommons"
+	},
+	"CC-BY-2.0": {
+		"alias": "^CC-BY[- ]?2$",
+		"family": "CreativeCommons"
+	},
+	"CC-BY-3.0": {
+		"alias": "^CC-BY[- ]?3$",
+		"family": "CreativeCommons"
+	},
+	"CC-BY-4.0": {
+		"alias": "^CC-BY[- ]?4$",
+		"family": "CreativeCommons"
 	}
 }

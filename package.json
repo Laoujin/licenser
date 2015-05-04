@@ -2,7 +2,7 @@
   "name": "licenser",
   "version": "0.0.1",
   "description": "Generate any SPDX license file with details from your package.json. Keep it updated each year :)",
-  "license": "LGPL-2.1+",
+  "license": "MIT",
   "author": {
     "name": "Wouter Van Schandevijl",
     "email": "woutervs@hotmail.com",
@@ -12,7 +12,9 @@
     "type": "git",
     "url": "https://github.com/Laoujin"
   },
-  "main": "index.js",
+  "bin": {
+    "licenser": "index.js"
+  },
   "files": [
     "index.js",
     "LICENSE"

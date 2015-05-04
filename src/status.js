@@ -29,17 +29,25 @@ function getCurrentAuthor() {
 		return packageJson.author;
 	}
 	return {
-		name: '',
+		name: __dirname.split('/').pop(),
 		email: '',
 		url: ''
 	};
 }
 
 function getCurrentProject() {
+	if (packageJson) {
+		return {
+			name: packageJson.name,
+			desc: packageJson.description,
+			url: packageJson.repository ? packageJson.repository.url : undefined
+		};
+	}
+
 	return {
-		name: packageJson.name,
-		desc: packageJson.description,
-		url: packageJson.repository ? packageJson.repository.url : undefined
+		name: '',
+		desc: '',
+		url: ''
 	};
 }
 
@@ -163,7 +171,6 @@ module.exports = {
 			var re = named(new RegExp(license.match, 'g'));
 
 			customLicense = re.replace(customLicense, function(matched) {
-				//console.log('matched', matched.captures);
 				return license.replace
 					.replace('$years', new Date().getFullYear())
 					.replace('$author', currentAuthor.name)
@@ -171,14 +178,6 @@ module.exports = {
 					.replace('$url', currentProject.url)
 					.replace('$project', currentProject.name + ' - ' + currentProject.desc);
 			});
-
-			//console.log("captured:", matched);
-
-			//
-			//console.log(matched.captures); //=> { foo: [ 'aaa', 'bbb' ], bar: [ 'ccc' ] }
-			//console.log(matched.capture('foo')); //=> 'bbb' // last matched
-
-			//currentAuthor.name / email / url
 		}
 
 		try {

@@ -1,21 +1,9 @@
 'use strict';
 
-// var swig = require('swig');
-// console.log(swig.render('{% if foo %}Hooray!{% endif %}', { locals: { foo: true }}));
-//{% if loop.first %} class="first"{% endif %}>{{ author }}
-//console.log('\u001b[94mwhat tha fuck\u001b[0m');
-
-//var l = console.log.bind();
-
-
-// Creative Commons Attribution zitten ook in de spdx
-
 // npm set init.author.name "Brent Ertz"
 // npm set init.author.email "brent.ertz@gmail.com"
 // npm set init.author.url "http://brentertz.com"
 //npm adduser
-
-//process.exit();
 
 // headers for licenses?
 //https://github.com/lisposter/license-gen/blob/master/lib/license_tpl.json
