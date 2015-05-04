@@ -226,9 +226,10 @@
 		"motivation": "I care about sharing improvements.",
 		"desc": "The GPL (V2 or V3) is a copyleft license that requires anyone who distributes your code or a derivative work to make the source available under the same terms. V3 is similar to V2, but further restricts use in hardware that forbids software alterations.\n\nLinux, Git, and WordPress use the GPL.",
 		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
-		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy)  (:<author>name of author)",
+		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy) (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
-		"header": "one line to give the program's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+If the program is interactive)"
+		"header": "one line to give the program's name and an idea of what it does..*([\\r\\n]+    .*)*",
+		"headerClean": "^     "
 	},
 	"GPL-2.0+": {
 		"family": "GPL",
@@ -257,11 +258,19 @@
 		"family": "GPL",
 		"common": true,
 		"motivation": "I care about sharing improvements.",
-		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
+		"headerClean": "^     "
 	},
 	"GPL-3.0+": {
 		"family": "GPL",
-		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*"
+		"clean": "\\s*How to Apply These Terms to Your New Programs[\\s\\S]*",
+		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
+		"headerClean": "^    "
 	},
 	"GPL-3.0-with-autoconf-exception": {
 		"family": "GPL"
@@ -272,22 +281,37 @@
 
 
 	"LGPL-2.0": {
+		"alias": "^LGPL[- ]?2$",
 		"family": "LGPL",
-		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*",
+		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+Also add information on how)",
+		"headerClean": "^     "
 	},
 	"LGPL-2.0+": {
 		"family": "LGPL",
-		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*",
+		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)"
 	},
 	"LGPL-2.1": {
 		"alias": "^LGPL[- ]?2[- .]1$",
 		"family": "LGPL",
 		"common": false,
-		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*",
+		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)",
+		"headerClean": "^     "
 	},
 	"LGPL-2.1+": {
 		"family": "LGPL",
-		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*"
+		"clean": "\\s\\s?How to Apply These Terms to Your New Libraries[\\s\\S]*",
+		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
+		"replace": "$project\nCopyright (C) $years  $author",
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)"
 	},
 	"LGPL-3.0": {
 		"alias": "^LGPL[- ]?3$",
