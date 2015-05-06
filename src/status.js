@@ -138,9 +138,6 @@ module.exports = {
 					}
 				}
 
-				if (lic.clean) {
-					lic.full = lic.full.replace(new RegExp(lic.clean), '');
-				}
 			} catch(err) {
 				console.log('Error reading ' + licenseKey + ' license content ', err);
 			}
