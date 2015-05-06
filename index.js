@@ -142,7 +142,7 @@ function toArray(object) {
 
 function renderTemplate(name, vars) {
 	var template = name;
-	template = swig.compileFile('./templates/' + template + '.tmpl');
+	template = swig.compileFile(__dirname + '/templates/' + template + '.tmpl');
 	var output = template(vars);
 	console.log(output);
 }
