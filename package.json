@@ -10,14 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Laoujin"
+    "url": "https://github.com/Laoujin/licenser"
   },
   "bin": {
     "licenser": "./index.js"
   },
   "files": [
     "index.js",
-    "LICENSE"
+    "licenses.json",
+    "src",
+    "templates"
   ],
   "dependencies": {
     "colors": "^1.1.0",
@@ -51,7 +53,7 @@
     "licences"
   ],
   "bugs": {
-    "url": "https://github.com/Laoujin/npm-spdx-license-syncer/issues"
+    "url": "https://github.com/Laoujin/licenser/issues"
   },
-  "homepage": "https://github.com/Laoujin/npm-spdx-license-syncer"
+  "homepage": "https://github.com/Laoujin/licenser"
 }
