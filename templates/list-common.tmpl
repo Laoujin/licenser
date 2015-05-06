@@ -1,7 +1,8 @@
-A list of commonly used licenses
+A list of commonly used licenses:
 {% for lic in licenses %}
 {{ lic.name }}
 {{ lic.motivation }}
 Key: {{ lic.key }}
 {% if opts.verbose %}{{ lic.desc }}{% endif %}
 {% endfor %}
+Use `licenser list -h` for more licenses
