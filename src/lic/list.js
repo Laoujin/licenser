@@ -25,6 +25,15 @@ module.exports = function(licenses, opts) {
 		});
 		return licenses;
 
+	} else if (opts.creativeCommons) {
+		var latestVersion = '-4.0';
+		_.forOwn(licenses, function(lic, key) {
+			if (key.indexOf('CC-') !== 0 || key.indexOf(latestVersion, key.length - latestVersion.length) === -1) {
+				delete licenses[key];
+			}
+		});
+		return licenses;
+
 	} else {
 		_.forOwn(licenses, function(lic, key) {
 			if (!lic.common) {

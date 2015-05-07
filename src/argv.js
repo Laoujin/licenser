@@ -6,10 +6,12 @@ module.exports = function(config) {
 		.callback(function(opts) {
 			if (opts._[1]) {
 				opts.searchFor = opts._[1];
-				if (!opts.osi) {
+				if (!opts.osi && !opts.creativeCommons) {
 					opts.all = true;
 				}
 			}
+
+			console.log(opts);
 
 			if (!opts.all && !opts.osi) {
 				opts.common = true;
@@ -19,6 +21,12 @@ module.exports = function(config) {
 		.option('filter', {
 			position: 1,
 			help: 'filters the list with the value given'
+		})
+		.option('creativeCommons', {
+			abbr: 'c',
+			full: 'creative-commons',
+			flag: true,
+			help: 'show the latest versions of the Creative Commons'
 		})
 		.option('common', {
 			flag: true,
@@ -55,7 +63,6 @@ module.exports = function(config) {
 			default: config.defaults.license
 		})
 		.option('author', {
-			abbr: 'auth',
 			help: 'name to place in the license',
 			default: config.defaults.author.name
 		})

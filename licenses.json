@@ -325,20 +325,34 @@
 	"OPL-1.0": {
 		"alias": "^OPL[- ]?1?$"
 	},
-	"CC-BY-1.0": {
-		"alias": "^CC-BY[- ]?1$",
-		"family": "CreativeCommons"
-	},
-	"CC-BY-2.0": {
-		"alias": "^CC-BY[- ]?2$",
-		"family": "CreativeCommons"
-	},
-	"CC-BY-3.0": {
-		"alias": "^CC-BY[- ]?3$",
-		"family": "CreativeCommons"
-	},
 	"CC-BY-4.0": {
-		"alias": "^CC-BY[- ]?4$",
-		"family": "CreativeCommons"
+		"alias": "^CC-?BY[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Allow adaptations to be shared and allow commercial use"
+	},
+	"CC-BY-ND-4.0": {
+		"alias": "^CC-?BY[- ]?ND[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Allow commercial use but do not allow adaptations to be shared"
+	},
+	"CC-BY-NC-4.0": {
+		"alias": "^CC-?BY[- ]?NC[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Allow adaptations to be shared but do not allow commercial use"
+	},
+	"CC-BY-NC-ND-4.0": {
+		"alias": "^CC-?BY[- ]?NC[- ]?ND[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Do not allow commercial use and do not allow adaptations to be shared"
+	},
+	"CC-BY-NC-SA-4.0": {
+		"alias": "^CC-?BY[- ]?NC[- ]?SA[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Do not allow commercial but do allow adaptations to be shared but only under the same license"
+	},
+	"CC-BY-SA-4.0": {
+		"alias": "^CC-?BY[- ]?SA[- ]?4$",
+		"family": "CreativeCommons",
+		"motivation": "Allow commercial use and allow adaptations to be shared but only under the same license"
 	}
 }
