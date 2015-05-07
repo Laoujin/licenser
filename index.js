@@ -11,19 +11,20 @@ var config = status.getConfig();
 
 // Running without parameters
 // Print some general license info
-renderTemplate('header');
 if (process.argv.length === 2) {
+	renderTemplate('header');
 	renderTemplate('status', config);
 	process.exit();
 }
 
 // Running with parameters
 // parse cli arguments
-var opts = require('./src/argv.js')();
+var opts = require('./src/argv.js')(config);
 
 // decide what to do
 switch (opts._[0]) {
 case 'list':
+	renderTemplate('header');
 	var list = toArray(require('./src/lic/list.js')(config.licenses, opts));
 	if (opts.common) {
 		var model = {
@@ -43,6 +44,7 @@ case 'print':
 	break;
 
 case 'set':
+	renderTemplate('header');
 	setCommand();
 	break;
 }
@@ -94,7 +96,7 @@ function setCommand() {
 		if (config.fileExists()) {
 			console.log('Overwriting existing license');
 		}
-		status.writeLicense(newLicense, opts.full);
+		status.writeLicense(newLicense);
 	}
 }
 
@@ -121,10 +123,6 @@ function printCandidates(list) {
 		});
 	}
 }
-
-// if (argv.i) {
-// 	console.log('interactive');
-// }
 
 
 function toArray(object) {

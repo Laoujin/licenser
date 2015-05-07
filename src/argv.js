@@ -1,7 +1,7 @@
 'use strict';
 var nomnom = require('nomnom');
 
-module.exports = function(args, config) {
+module.exports = function(config) {
 	nomnom.command('list')
 		.callback(function(opts) {
 			if (opts._[1]) {
@@ -42,32 +42,43 @@ module.exports = function(args, config) {
 		})
 		.option('header', {
 			flag: true,
-			help: 'show the license header instead of the full license (For licenses like Apache-2.0, GPL-2.0+ etc a smallish header can be included instead of the entire license text)'
+			help: 'show the license header instead of the full license (For licenses like Apache-2.0, GPL-3.0+ etc a smallish header can be included in your source files instead of the entire license text in each file)'
 		})
 		.help('print a full license');
 
 	nomnom.command('set')
-		.callback(function(opts) {
-			
-		})
 		.help('sets the license and adds the file')
 		.option('license', {
 			position: 1,
 			help: 'the license key',
-			required: true
+			default: config.defaults.license
 		})
 		.option('author', {
 			abbr: 'auth',
-			help: 'name to place in the license'
-		})
-		.option('full', {
-			flag: true
+			help: 'name to place in the license',
+			default: config.defaults.author.name
 		})
 		.option('year', {
 			help: 'year to place in the license',
-			default: new Date().getFullYear()
+			default: config.defaults.project.years
+		})
+		.option('email', {
+			help: 'author email',
+			default: config.defaults.author.email
+		})
+		.option('url', {
+			help: 'project url',
+			default: config.defaults.project.url
+		})
+		.option('project', {
+			help: 'project name',
+			default: config.defaults.project.name
+		})
+		.option('desc', {
+			help: 'project description',
+			default: config.defaults.project.desc
 		});
 
-	var opts = nomnom.parse(args);
+	var opts = nomnom.parse();
 	return opts;
 };

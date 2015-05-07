@@ -38,20 +38,26 @@ function getCurrentAuthor() {
 function getCurrentProject() {
 	if (packageJson) {
 		return {
+			years: new Date().getFullYear(),
 			name: packageJson.name,
 			desc: packageJson.description,
-			url: packageJson.repository ? packageJson.repository.url : undefined
+			url: packageJson.repository ? packageJson.repository.url : ''
 		};
 	}
 
 	return {
+		years: new Date().getFullYear(),
 		name: '',
 		desc: '',
 		url: ''
 	};
 }
 
-var currentLicense = packageJson ? packageJson.license : '';
+function getCurrentLicense() {
+	return packageJson ? packageJson.license : '';
+}
+
+var currentLicense = getCurrentLicense();
 var currentAuthor = getCurrentAuthor();
 var currentProject = getCurrentProject();
 
@@ -71,14 +77,17 @@ var filePath = path.join(process.cwd(), globalConfig.fileName);
 module.exports = {
 	getConfig: function(spdxlicenses) {
 		var config = {
-			//fileName: globalConfig.fileName,
-			// filePath: path.join(process.cwd(), this.fileName),
 			fileExists: function() {
 				return fs.existsSync(filePath);
 			},
 			license: this.getDetails(currentLicense),
 			licenses: licenses,
-			hasNpmPackage: packageJson !== undefined
+			hasNpmPackage: packageJson !== undefined,
+			defaults: {
+				license: currentLicense,
+				author: currentAuthor,
+				project: currentProject
+			}
 		};
 
 		return config;
@@ -119,23 +128,25 @@ module.exports = {
 		}
 		return list;
 	},
-	getDetails: function(licenseKey, full) {
-		full = full || false;
+	getDetails: function(licenseKey, getFullText) {
+		getFullText = getFullText || false;
 
 		var lic = _.merge({
 			key: licenseKey,
 			valid: licenses[licenseKey] !== undefined
 		}, licenses[licenseKey]);
 
-		if (full && lic.valid) {
+		if (getFullText && lic.valid) {
 			try {
 				lic.full = fs.readFileSync(spdxLicensesPath + licenseKey +'.txt').toString();
-
 				if (lic.header) {
 					lic.header = new RegExp(lic.header).exec(lic.full)[0];
 					if (lic.headerClean) {
 						lic.header = lic.header.replace(new RegExp(lic.headerClean, 'mg'), '');
 					}
+					lic.header = replacePlaceHolders(lic.match, lic.replace, lic.header);
+				} else {
+					lic.full = replacePlaceHolders(lic.match, lic.replace, lic.full);
 				}
 
 			} catch(err) {
@@ -160,28 +171,29 @@ module.exports = {
 			});
 		});
 	},
-	writeLicense: function(license, useFullTextInsteadOfHeader) {
-		var customLicense = license.header && !useFullTextInsteadOfHeader ? license.header : license.full;
-
-		if (license.match) {
-			var named = require('named-regexp').named;
-			var re = named(new RegExp(license.match, 'g'));
-
-			customLicense = re.replace(customLicense, function(matched) {
-				return license.replace
-					.replace('$years', new Date().getFullYear())
-					.replace('$author', currentAuthor.name)
-					.replace('$email', currentAuthor.email)
-					.replace('$url', currentProject.url)
-					.replace('$project', currentProject.name + ' - ' + currentProject.desc);
-			});
-		}
-
+	writeLicense: function(license) {
 		try {
-			fs.writeFileSync(filePath, customLicense, 'utf8');
+			fs.writeFileSync(filePath, license.full, 'utf8');
 			console.log(globalConfig.fileName + ' created');
 		} catch(err) {
 			console.log('Error writing license file', err);
 		}
 	}
 };
+
+function replacePlaceHolders(matcher, replacer, licenseText) {
+	if (matcher) {
+		var named = require('named-regexp').named;
+		var re = named(new RegExp(matcher, 'g'));
+
+		return re.replace(licenseText, function(matched) {
+			return replacer
+				.replace('$years', currentProject.years)
+				.replace('$author', currentAuthor.name)
+				.replace('$email', currentAuthor.email)
+				.replace('$url', currentProject.url)
+				.replace('$project', currentProject.name + ' - ' + currentProject.desc);
+		});
+	}
+	return licenseText;
+}
