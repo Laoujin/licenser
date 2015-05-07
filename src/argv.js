@@ -34,10 +34,11 @@ module.exports = function(config) {
 			help: 'show OSI approved licenses'
 		});
 
+	var licenseKeyHelp = 'the license key (ex: MIT, Apache2, GPL3, ...)';
 	nomnom.command('print')
 		.option('key', {
 			position: 1,
-			help: 'the license key',
+			help: licenseKeyHelp,
 			required: true
 		})
 		.option('header', {
@@ -50,7 +51,7 @@ module.exports = function(config) {
 		.help('sets the license and adds the file')
 		.option('license', {
 			position: 1,
-			help: 'the license key',
+			help: licenseKeyHelp,
 			default: config.defaults.license
 		})
 		.option('author', {

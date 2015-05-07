@@ -8,6 +8,7 @@ var path = require('path');
 var jsonFile = require('json-file-plus');
 var packageJsonPath = path.join(process.cwd(), 'package.json');
 var assert = require('assert');
+var ini = require('node-ini');
 
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
@@ -28,10 +29,22 @@ function getCurrentAuthor() {
 	if (packageJson) {
 		return packageJson.author;
 	}
-	return {
-		name: __dirname.split('/').pop(),
+
+	var author = {
+		name: '',
 		email: ''
 	};
+
+	var gitPath = path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.gitconfig');
+	if (fs.existsSync(gitPath)) {
+		var git = ini.parseSync(gitPath);
+		if (git.user) {
+			author.name = git.user.name;
+			author.email = git.user.email;
+		}
+	}
+
+	return author;
 }
 
 function getCurrentProject() {
@@ -40,13 +53,15 @@ function getCurrentProject() {
 			years: new Date().getFullYear(),
 			name: packageJson.name,
 			desc: packageJson.description
-			//url: packageJson.repository ? packageJson.repository.url : ''
 		};
 	}
 
+	var name = path.normalize(__dirname + '/../').split(path.sep);
+	assert(name[name.length -1] === '');
+	name = name[name.length - 2];
 	return {
 		years: new Date().getFullYear(),
-		name: '',
+		name: name,
 		desc: ''
 	};
 }
