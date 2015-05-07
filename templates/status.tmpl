@@ -6,7 +6,7 @@ Your license: {{ license.key }}
 {%- if !license.valid %}
 This license is not recognized by SPDX...
 {%- else %}
-{%- if license.motivation %}Because you {{ license.motivation.substr(2) }}{% endif %}
+{%- if license.motivationYou %}{{ license.motivationYou }}{% endif %}
 {%- if !license.osiApproved %}This license is not OSI approved{% endif %}
 {%- endif %}
 {%- endif %}
