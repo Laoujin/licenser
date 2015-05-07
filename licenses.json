@@ -50,6 +50,7 @@
 		"family": "Apache"
 	},
 	"Apache-2.0": {
+		"url": "http://opensource.org/licenses/Apache-2.0",
 		"alias": "^Apache[- ]?2$",
 		"family": "Apache",
 		"common": true,
@@ -160,6 +161,7 @@
 		"replace": "Copyright (c) $years $author $email"
 	},
 	"MIT": {
+		"url" : "http://opensource.org/licenses/MIT",
 		"family": "MIT",
 		"common": true,
 		"motivation": "I want it simple and permissive",
@@ -216,6 +218,7 @@
 		"headerClean": "^     "
 	},
 	"GPL-2.0": {
+		"url": "http://opensource.org/licenses/GPL-2.0",
 		"alias": "^GPL[- ]?2$",
 		"family": "GPL",
 		"common": true,
@@ -249,6 +252,7 @@
 		"family": "GPL"
 	},
 	"GPL-3.0": {
+		"url": "http://opensource.org/licenses/GPL-3.0",
 		"alias": "^GPL[- ]?3$",
 		"family": "GPL",
 		"common": true,
@@ -326,31 +330,37 @@
 		"alias": "^OPL[- ]?1?$"
 	},
 	"CC-BY-4.0": {
+		"url": "http://creativecommons.org/licenses/by/4.0/",
 		"alias": "^CC-?BY[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Allow adaptations to be shared and allow commercial use"
 	},
 	"CC-BY-ND-4.0": {
+		"url": "http://creativecommons.org/licenses/by-nd/4.0/",
 		"alias": "^CC-?BY[- ]?ND[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Allow commercial use but do not allow adaptations to be shared"
 	},
 	"CC-BY-NC-4.0": {
+		"url": "http://creativecommons.org/licenses/by-nc/4.0/",
 		"alias": "^CC-?BY[- ]?NC[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Allow adaptations to be shared but do not allow commercial use"
 	},
 	"CC-BY-NC-ND-4.0": {
+		"url": "http://creativecommons.org/licenses/by-nc-nd/4.0/",
 		"alias": "^CC-?BY[- ]?NC[- ]?ND[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Do not allow commercial use and do not allow adaptations to be shared"
 	},
 	"CC-BY-NC-SA-4.0": {
+		"url": "http://creativecommons.org/licenses/by-nc-sa/4.0/",
 		"alias": "^CC-?BY[- ]?NC[- ]?SA[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Do not allow commercial but do allow adaptations to be shared but only under the same license"
 	},
 	"CC-BY-SA-4.0": {
+		"url": "http://creativecommons.org/licenses/by-sa/4.0/",
 		"alias": "^CC-?BY[- ]?SA[- ]?4$",
 		"family": "CreativeCommons",
 		"motivation": "Allow commercial use and allow adaptations to be shared but only under the same license"

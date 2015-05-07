@@ -22,6 +22,11 @@ module.exports = function(config) {
 			position: 1,
 			help: 'filters the list with the value given'
 		})
+		.option('verbose', {
+			abbr: 'v',
+			flag: true,
+			help: 'show more information for the most common licenses'
+		})
 		.option('creativeCommons', {
 			abbr: 'c',
 			full: 'creative-commons',

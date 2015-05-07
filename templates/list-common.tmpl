@@ -3,6 +3,9 @@ A list of commonly used licenses:
 {{ lic.name }}
 {{ lic.motivation }}
 Key: {{ lic.key }}
-{% if opts.verbose %}{{ lic.desc }}{% endif %}
+{% if lic.url %}Url: {{ lic.url }}{% endif %}
+{% if opts.verbose %}
+{{ lic.desc }}
+{% endif %}
 {% endfor %}
 Use `licenser list -h` for more licenses
