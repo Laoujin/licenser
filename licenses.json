@@ -31,9 +31,7 @@
 	},
 	"AGPL-1.0": {
 		"alias": "^AGPL[- ]?1$",
-		"family": "AGPL",
-		"match" : "Copyright © (:<years>2002) (:<author>Affero Inc. 510 Third Street - Suite 225, San Francisco, CA 94107, USA)",
-		"replace": "Copyright © $years $author"
+		"family": "AGPL"
 	},
 	"AGPL-3.0": {
 		"alias": "^AGPL[- ]?3$",
@@ -157,15 +155,15 @@
 		"replace": "ISC License:\n\nCopyright (c) $years by $author"
 	},
 	"WTFPL": {
-		"match": "Copyright \\(C\\) (:<years><YEAR>), (:<author><OWNER>)",
-		"replace": "Copyright (C) $years $author $email"
+		"match": "Copyright \\(c\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
+		"replace": "Copyright (c) $years $author $email"
 	},
 	"MIT": {
 		"family": "MIT",
 		"common": true,
 		"motivation": "I want it simple and permissive",
 		"desc": "The MIT License is a permissive license that is short and to the point. It lets people do anything they want with your code as long as they provide attribution back to you and don’t hold you liable.\n\njQuery and Rails use the MIT License.",
-		"match": "Copyright \\(c\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
+		"match": "Copyright \\(c\\) (:<years><year>) (:<author><copyright holders>)",
 		"replace": "Copyright (c) $years $author"
 	},
 	"MPL-1.0": {
@@ -304,14 +302,10 @@
 	"LGPL-3.0": {
 		"alias": "^LGPL[- ]?3$",
 		"family": "LGPL",
-		"common": false,
-		"match": "Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
-		"replace": "Copyright (C) $years $author $url"
+		"common": false
 	},
 	"LGPL-3.0+": {
-		"family": "LGPL",
-		"match": " Copyright \\(C\\) (:<years>2007) (:<author>Free Software Foundation, Inc\\.) (:<url><http://fsf.org/>)",
-		"replace": "Copyright (C) $years $author $url"
+		"family": "LGPL"
 	},
 	"NPOSL-3.0": {
 		"alias": "^NPOSL[- ]?3$"
