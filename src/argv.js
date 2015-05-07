@@ -59,16 +59,12 @@ module.exports = function(config) {
 			default: config.defaults.author.name
 		})
 		.option('year', {
-			help: 'year to place in the license',
+			help: 'year(s) to place in the license (ex: 2003-2015 or 2015)',
 			default: config.defaults.project.years
 		})
 		.option('email', {
 			help: 'author email',
 			default: config.defaults.author.email
-		})
-		.option('url', {
-			help: 'project url',
-			default: config.defaults.project.url
 		})
 		.option('project', {
 			help: 'project name',

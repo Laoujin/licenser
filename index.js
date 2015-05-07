@@ -20,6 +20,7 @@ if (process.argv.length === 2) {
 // Running with parameters
 // parse cli arguments
 var opts = require('./src/argv.js')(config);
+config.update(opts);
 
 // decide what to do
 switch (opts._[0]) {

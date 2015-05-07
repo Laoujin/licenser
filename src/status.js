@@ -30,8 +30,7 @@ function getCurrentAuthor() {
 	}
 	return {
 		name: __dirname.split('/').pop(),
-		email: '',
-		url: ''
+		email: ''
 	};
 }
 
@@ -40,16 +39,15 @@ function getCurrentProject() {
 		return {
 			years: new Date().getFullYear(),
 			name: packageJson.name,
-			desc: packageJson.description,
-			url: packageJson.repository ? packageJson.repository.url : ''
+			desc: packageJson.description
+			//url: packageJson.repository ? packageJson.repository.url : ''
 		};
 	}
 
 	return {
 		years: new Date().getFullYear(),
 		name: '',
-		desc: '',
-		url: ''
+		desc: ''
 	};
 }
 
@@ -87,6 +85,26 @@ module.exports = {
 				license: currentLicense,
 				author: currentAuthor,
 				project: currentProject
+			},
+			update: function(opts) {
+				if (opts.license) {
+					this.defaults.license = opts.license;
+				}
+				if (opts.author) {
+					this.defaults.author.name = opts.author;
+				}
+				if (opts.year) {
+					this.defaults.project.years = opts.year;
+				}
+				if (opts.email) {
+					this.defaults.author.email = opts.email;
+				}
+				if (opts.project) {
+					this.defaults.project.name = opts.project;
+				}
+				if (opts.desc) {
+					this.defaults.project.desc = opts.desc;
+				}
 			}
 		};
 
