@@ -81,11 +81,26 @@ var licenses = licenseModelBuilder({
 	common: require('../licenses.json')
 });
 
-var globalConfig = {
-	fileName: 'LICENSE'
+var licenseFileConfig = {
+	names: ['LICENSE', 'COPYING'],
+	exts: ['', '.md', '.txt'],
+	defaultFileName: 'LICENSE'
 };
 
-var filePath = path.join(process.cwd(), globalConfig.fileName);
+function getLicenseFilePath() {
+	var existing;
+	_.forEach(licenseFileConfig.names, function(name) {
+		_.forEach(licenseFileConfig.exts, function(ext) {
+			var fileName = path.join(process.cwd(), name + ext);
+			if (fs.existsSync(fileName)) {
+				existing = fileName;
+			}
+		});
+	});
+	return existing || path.join(process.cwd(), licenseFileConfig.defaultFileName);
+}
+
+var filePath = getLicenseFilePath();
 
 module.exports = {
 	getConfig: function(spdxlicenses) {
@@ -207,7 +222,7 @@ module.exports = {
 	writeLicense: function(license) {
 		try {
 			fs.writeFileSync(filePath, license.full, 'utf8');
-			console.log(globalConfig.fileName + ' created');
+			console.log(licenseFileConfig.defaultFileName + ' created');
 		} catch(err) {
 			console.log('Error writing license file', err);
 		}
