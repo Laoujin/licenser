@@ -10,6 +10,7 @@ var packageJsonPath = path.join(process.cwd(), 'package.json');
 var assert = require('assert');
 var ini = require('node-ini');
 
+var globalDefaults = require('../config.json');
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
 // read node package.json
@@ -26,7 +27,13 @@ if (fs.existsSync(packageJsonPath)) {
 }
 
 function getCurrentAuthor() {
-	if (packageJson) {
+	if (globalDefaults.author) {
+		return {
+			name: globalDefaults.author,
+			email: globalDefaults.email
+		};
+
+	} else if (packageJson) {
 		return packageJson.author;
 	}
 
@@ -67,6 +74,10 @@ function getCurrentProject() {
 }
 
 function getCurrentLicense() {
+	if (globalDefaults.license) {
+		return globalDefaults.license;
+	}
+
 	return packageJson ? packageJson.license : '';
 }
 
@@ -84,7 +95,7 @@ var licenses = licenseModelBuilder({
 var licenseFileConfig = {
 	names: ['LICENSE', 'COPYING'],
 	exts: ['', '.md', '.txt'],
-	defaultFileName: 'LICENSE'
+	defaultFileName: globalDefaults.defaultFileName
 };
 
 function getLicenseFilePath() {
