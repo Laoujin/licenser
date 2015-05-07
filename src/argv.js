@@ -11,8 +11,6 @@ module.exports = function(config) {
 				}
 			}
 
-			console.log(opts);
-
 			if (!opts.all && !opts.osi) {
 				opts.common = true;
 			}

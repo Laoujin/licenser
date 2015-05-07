@@ -5,7 +5,7 @@ var status = require('../status.js');
 
 module.exports = function(licenses, opts) {
 	if (opts.searchFor) {
-		var toKeep = status.getMatches(opts.searchFor);
+		var toKeep = status.getMatches(opts.searchFor, true);
 
 		_.forOwn(licenses, function(lic, key) {
 			if (toKeep.indexOf(key) === -1) {

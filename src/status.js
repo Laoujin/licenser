@@ -140,7 +140,7 @@ module.exports = {
 
 		return config;
 	},
-	getMatches: function(needle) {
+	getMatches: function(needle, returnAll) {
 		needle = needle.toLowerCase();
 
 		var i;
@@ -150,14 +150,24 @@ module.exports = {
 		var keys = Object.keys(licenses);
 		for (i = 0; i < keys.length; i++) {
 			if (needle === keys[i].toLowerCase()) {
-				return [keys[i]];
+				if (returnAll) {
+					list.push(keys[i]);
+					continue;
+				} else {
+					return [keys[i]];
+				}
 			}
 
 			var lic = licenses[keys[i]];
 			if (lic.alias) {
 				var aliasRegex = new RegExp(lic.alias, 'i');
 				if (needle.match(aliasRegex)) {
-					return [keys[i]];
+					if (returnAll) {
+						list.push(keys[i]);
+						continue;
+					} else {
+						return [keys[i]];
+					}
 				}
 			}
 
@@ -171,8 +181,8 @@ module.exports = {
 			}
 		}
 
-		if (list.length === 0) {
-			return descMatches;
+		if (returnAll || list.length === 0) {
+			return descMatches.concat(list);
 		}
 		return list;
 	},
