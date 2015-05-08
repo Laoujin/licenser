@@ -99,9 +99,6 @@ function setCommand() {
 			}
 		}
 
-		if (config.fileExists()) {
-			console.log('Overwriting existing license');
-		}
 		status.writeLicense(newLicense);
 	}
 }

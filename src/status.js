@@ -115,12 +115,13 @@ function getLicenseFileName() {
 	return existing || licenseFileConfig.defaultFileName;
 }
 
+var config;
 var fileName = getLicenseFileName();
 var filePath = path.join(process.cwd(), fileName);
 
 module.exports = {
 	getConfig: function(spdxlicenses) {
-		var config = {
+		config = {
 			global: globalDefaults,
 			fileName: fileName,
 			fileExists: function() {
@@ -262,11 +263,27 @@ module.exports = {
 		});
 	},
 	writeLicense: function(license) {
-		try {
-			fs.writeFileSync(filePath, license.full, 'utf8');
-			console.log(fileName + ' created');
-		} catch(err) {
-			console.log('Error writing license file', err);
+		var doWrite = false;
+		if (!config.fileExists()) {
+			doWrite = true;
+
+		} else {
+			var currentContent = fs.readFileSync(filePath).toString();
+			if (currentContent !== license.full) {
+				doWrite = true;
+				console.log('Overwriting existing ' + fileName + ' file');
+			} else {
+				console.log(fileName + ' file was up to date');
+			}
+		}
+
+		if (doWrite) {
+			try {
+				fs.writeFileSync(filePath, license.full, 'utf8');
+				console.log(fileName + ' created');
+			} catch(err) {
+				console.log('Error writing license file', err);
+			}
 		}
 	},
 	setGlobal: function(opts) {
