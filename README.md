@@ -50,5 +50,5 @@ $ licenser list open --osi # All OSI approved licenses matching 'open'
 
 # Output license text to console
 $ licenser print gpl3
-$ licenser print gpl3 --header
+$ licenser print gpl3 --header # Print the "HOW TO APPLY THESE TERMS" header
 ```
