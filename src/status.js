@@ -140,6 +140,14 @@ module.exports = {
 					this.defaults.license = globalDefaults.license;
 					opts.license = globalDefaults.license;
 
+					if (opts._[0] === 'set' && fileName !== licenseFileConfig.defaultFileName) {
+						// Zie uglyness
+						fs.unlinkSync(filePath);
+
+						fileName = licenseFileConfig.defaultFileName;
+						filePath = path.join(process.cwd(), fileName);
+					}
+
 				} else if (opts.license) {
 					this.defaults.license = opts.license;
 				}
