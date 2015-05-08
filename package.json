@@ -1,6 +1,6 @@
 {
   "name": "licenser",
-  "version": "0.0.1",
+  "version": "0.8.0",
   "description": "Generate any SPDX license file with details from your package.json. Keep it updated each year :)",
   "license": "MIT",
   "author": {
