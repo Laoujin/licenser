@@ -3,31 +3,36 @@
 		"alias": "^AFL[- ]?1[- .]1$",
 		"family": "AFL",
 		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author"
+		"replace": "Copyright (C) $years $author",
+		"recognize": "Licensed under the Academic Free License version 1.1."
 	},
 	"AFL-1.2": {
 		"alias": "^AFL[- ]?1[- .]2$",
 		"family": "AFL",
 		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author"
+		"replace": "Copyright (C) $years $author",
+		"recognize": "Licensed under the Academic Free License version 1.2 "
 	},
 	"AFL-2.0": {
 		"alias": "^AFL[- ]?2$",
 		"family": "AFL",
 		"match": "Copyright \\(C\\) (:<years>2003) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author"
+		"replace": "Copyright (C) $years $author",
+		"recognize": "Licensed under the Academic Free License version 2.0 "
 	},
 	"AFL-2.1": {
 		"alias": "^AFL[- ]?2[- .]1$",
 		"family": "AFL",
 		"match": "Copyright \\(C\\) (:<years>2003-2004) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author"
+		"replace": "Copyright (C) $years $author",
+		"recognize": "Licensed under the Academic Free License version 2.1  "
 	},
 	"AFL-3.0": {
 		"alias": "^AFL[- ]?3$",
 		"family": "AFL",
 		"match": "Copyright © (:<years>2005) (:<author>Lawrence Rosen)",
-		"replace": "Copyright © $years $author"
+		"replace": "Copyright © $years $author",
+		"recognize": "Licensed under the Academic Free License version 3.0  "
 	},
 	"AGPL-1.0": {
 		"alias": "^AGPL[- ]?1$",
@@ -39,7 +44,8 @@
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
-		"headerClean": "^    "
+		"headerClean": "^    ",
+		"recognize": ""
 	},
 	"Apache-1.0": {
 		"alias": "^Apache[- ]?1$",
@@ -59,7 +65,8 @@
 		"desc": "The Apache License is a permissive license similar to the MIT License, but also provides an express grant of patent rights from contributors to users.\n\nApache, SVN, and NuGet use the Apache License.",
 		"match": "Copyright (:<years>\\[yyyy\\]) (:<author>\\[name of copyright owner\\])",
 		"replace": "Copyright $years $author",
-		"header": ".*\\s*Licensed under the Apache License[\\s\\S]*"
+		"header": ".*\\s*Licensed under the Apache License[\\s\\S]*",
+		"recognize": ""
 	},
 	"APL-1.0": {
 		"alias": "^APL[- ]?1$"
@@ -98,19 +105,22 @@
 		"alias": "^BSD[- ]?2$",
 		"family": "BSD",
 		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<author><OWNER>)",
-		"replace": "Copyright (c) $years $author"
+		"replace": "Copyright (c) $years $author",
+		"recognize": "Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution."
 	},
 	"BSD-3-Clause": {
 		"alias": "^BSD[- ]?3$",
 		"family": "BSD",
 		"match": "Copyright \\(c\\) (:<years><YEAR>), (:<author><OWNER>)",
-		"replace": "Copyright (c) $years $author"
+		"replace": "Copyright (c) $years $author",
+		"recognize": "Neither the name of the ORGANIZATION nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission."
 	},
 	"BSD-4-Clause": {
 		"alias": "^BSD[- ]?4$",
 		"family": "BSD",
 		"match": "Copyright \\(c\\) (:<years><year>), (:<author><copyright holder>)",
-		"replace": "Copyright (c) $years $author"
+		"replace": "Copyright (c) $years $author",
+		"recognize": "All advertising materials mentioning features or use of this software must display the following acknowledgement:"
 	},
 	"CDDL-1.0": {
 		"alias": "^CDDL[- ]?1$",
@@ -154,11 +164,13 @@
 	},
 	"ISC": {
 		"match": "(?:[\\s\\S]*)(:<years>1995-2003) by (:<author>Internet Software Consortium)",
-		"replace": "ISC License:\n\nCopyright (c) $years by $author"
+		"replace": "ISC License:\n\nCopyright (c) $years by $author",
+		"recognize": "ISC License:"
 	},
 	"WTFPL": {
-		"match": "Copyright \\(c\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
-		"replace": "Copyright (c) $years $author $email"
+		"match": "Copyright \\(C\\) (:<years>2004) (:<author>Sam Hocevar) (:<email><sam@hocevar.net>)",
+		"replace": "Copyright (c) $years $author $email",
+		"recognize": "DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE"
 	},
 	"MIT": {
 		"url" : "http://opensource.org/licenses/MIT",
@@ -208,7 +220,8 @@
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years>19yy)  (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
-		"headerClean": "^    "
+		"headerClean": "^    ",
+		"recognize": ""
 	},
 	"GPL-1.0": {
 		"alias": "^GPL[- ]?1$",
@@ -216,7 +229,8 @@
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years>19yy) (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "<one line to give the program's name and a brief idea of what it does.>.*([\\r\\n]+    .*)*",
-		"headerClean": "^     "
+		"headerClean": "^     ",
+		"recognize": ""
 	},
 	"GPL-2.0": {
 		"url": "http://opensource.org/licenses/GPL-2.0",
@@ -229,13 +243,15 @@
 		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy) (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "one line to give the program's name and an idea of what it does..*([\\r\\n]+    .*)*",
-		"headerClean": "^     "
+		"headerClean": "^     ",
+		"recognize": ""
 	},
 	"GPL-2.0+": {
 		"family": "GPL",
 		"match": "(:<project>one line to give the program's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>yyyy)  (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
-		"header": "one line to give the program's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+If the program is interactive)"
+		"header": "one line to give the program's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+If the program is interactive)",
+		"recognize": ""
 	},
 	"GPL-2.0-with-autoconf-exception": {
 		"family": "GPL"
@@ -262,14 +278,16 @@
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
-		"headerClean": "^     "
+		"headerClean": "^     ",
+		"recognize": ""
 	},
 	"GPL-3.0+": {
 		"family": "GPL",
 		"match": "(:<project><one line to give the program's name and a brief idea of what it does.>)\\s*Copyright \\(C\\) (:<years><year>)  (:<author><name of author>)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "<one line to give the program's name and a brief idea of what it does.>([\\r\\n]+    .*)*",
-		"headerClean": "^    "
+		"headerClean": "^    ",
+		"recognize": ""
 	},
 	"GPL-3.0-with-autoconf-exception": {
 		"family": "GPL"
@@ -285,13 +303,15 @@
 		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+Also add information on how)",
-		"headerClean": "^     "
+		"headerClean": "^     ",
+		"recognize": ""
 	},
 	"LGPL-2.0+": {
 		"family": "LGPL",
 		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
-		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)"
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)",
+		"recognize": ""
 	},
 	"LGPL-2.1": {
 		"alias": "^LGPL[- ]?2[- .]1$",
@@ -300,13 +320,15 @@
 		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
 		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)",
-		"headerClean": "^     "
+		"headerClean": "^     ",
+		"recognize": ""
 	},
 	"LGPL-2.1+": {
 		"family": "LGPL",
 		"match": "(:<project>one line to give the library's name and an idea of what it does.)\\s*Copyright \\(C\\) (:<years>year)  (:<author>name of author)",
 		"replace": "$project\nCopyright (C) $years  $author",
-		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)"
+		"header": "one line to give the library's name and an idea of what it does.([\\r\\n]+.*)*?(?=[\\r\\n]+You should also get your employer)",
+		"recognize": ""
 	},
 	"LGPL-3.0": {
 		"alias": "^LGPL[- ]?3$",
