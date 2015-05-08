@@ -146,6 +146,7 @@ module.exports = {
 						fs.unlinkSync(filePath);
 
 						fileName = licenseFileConfig.defaultFileName;
+						config.fileName = fileName;
 						filePath = path.join(process.cwd(), fileName);
 					}
 
@@ -262,13 +263,16 @@ module.exports = {
 			});
 		});
 	},
+	readLicenseFile: function() {
+		return fs.readFileSync(filePath).toString();
+	},
 	writeLicense: function(license) {
 		var doWrite = false;
 		if (!config.fileExists()) {
 			doWrite = true;
 
 		} else {
-			var currentContent = fs.readFileSync(filePath).toString();
+			var currentContent = this.readLicenseFile();
 			if (currentContent !== license.full) {
 				doWrite = true;
 				console.log('Overwriting existing ' + fileName + ' file');
@@ -280,7 +284,7 @@ module.exports = {
 		if (doWrite) {
 			try {
 				fs.writeFileSync(filePath, license.full, 'utf8');
-				console.log(fileName + ' created');
+				console.log(fileName + ' written');
 			} catch(err) {
 				console.log('Error writing license file', err);
 			}

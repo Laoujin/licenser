@@ -49,6 +49,11 @@ case 'set':
 	setCommand();
 	break;
 
+case 'update':
+	renderTemplate('header');
+	updateCommand();
+	break;
+
 case 'config':
 	renderTemplate('header');
 	status.setGlobal(opts);
@@ -71,6 +76,46 @@ function simpleLicensePrint(lic, addOsiApproved) {
 	} else {
 		console.log(str);
 	}
+}
+
+var cancelUpdate = false;
+function updateCommand() {
+	var license = config.license;
+	if (!license.valid) {
+		console.log(colors.magenta(license.key +' is not a recognized SPDX license!'));
+	} else if (!license.match) {
+		console.log('Your license has no placeholders for \'years\'. (or it is not yet configured?)');
+	} else if (!config.fileExists()) {
+		console.log('You do not have a license file! Use `licenser set`?');
+	} else {
+		var content = status.readLicenseFile();
+		if (!content.match(license.recognize)) {
+			console.log('Failed to recognize your license file as ' + license.key);
+		} else {
+			var updatedLicense = transformCopyrightMatcher(content);
+			if (!cancelUpdate && updatedLicense) {
+				status.writeLicense({full: updatedLicense});
+			}
+		}
+	}
+}
+
+
+function transformCopyrightMatcher(licenseText) {
+	var matcher = /(Copyright\s+(?:@|\([cC]\)\s+)?)(?:(\d{4})(?:(\s*-\s*)(\d{4}))?|\[?yyyy\]?|<year>|19yy)/i;
+	var currentYear = new Date().getFullYear();
+	return licenseText.replace(matcher, function(match, copyrightPrefix, firstYear, inBetween, lastYear) {
+		if (isNaN(firstYear)) {
+			cancelUpdate = true;
+			console.log('Saw original placeholders. Use `licenser set` first?');
+		} else if (parseInt(firstYear, 10) !== currentYear && (lastYear === undefined || parseInt(lastYear, 10) !== currentYear)) {
+			console.log('Updated license for the year ' + currentYear);
+			return copyrightPrefix + firstYear + (inBetween || '-') + currentYear;
+		} else {
+			cancelUpdate = true;
+			console.log('Year was ok in file.');
+		}
+	});
 }
 
 function setCommand() {

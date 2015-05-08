@@ -19,6 +19,9 @@ $ licenser set
 $ licenser set apache2
 $ licenser set mit
 $ licenser set gpl3
+
+# Update the year in the LICENSE file
+$ licenser update
 ```
 
 ## Config
@@ -31,6 +34,7 @@ Your default license and author data can be set globally:
 $ licenser config --author="Mr. Fancy Pants" --email="fp@adventure.com"
 $ licenser config --default-name="LICENSE.txt" --license=CC-BY-NC-4.0 
 ```
+You can also edit `config.json` directly.
 
 
 ## Other Commands
