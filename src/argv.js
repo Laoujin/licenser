@@ -79,12 +79,29 @@ module.exports = function(config) {
 		})
 		.help('print a full license');
 
+	nomnom.command('update')
+		.option('readme', {
+			flag: true,
+			help: 'also update the year in README.md',
+			default: true
+		})
+		.help('your yearly license update automated. wheee!');
+
 	nomnom.command('set')
 		.help('sets the license and adds the file')
 		.option('license', {
 			position: 1,
 			help: licenseKeyHelp,
 			default: config.defaults.license
+		})
+		.option('force', {
+			abbr: 'f',
+			flag: true,
+			help: 'overwrite package.json and/or file with your global licenser configuration'
+		})
+		.option('readme', {
+			flag: true,
+			help: 'also add license notice at the end of the README.md file'
 		})
 		.option('author', {
 			help: 'name to place in the license',

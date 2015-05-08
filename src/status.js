@@ -74,11 +74,15 @@ function getCurrentProject() {
 }
 
 function getCurrentLicense() {
+	if (packageJson && packageJson.license) {
+		return packageJson.license;
+	}
+
 	if (globalDefaults.license) {
 		return globalDefaults.license;
 	}
 
-	return packageJson ? packageJson.license : '';
+	return '';
 }
 
 var currentLicense = getCurrentLicense();
@@ -125,15 +129,21 @@ module.exports = {
 			license: this.getDetails(currentLicense),
 			licenses: licenses,
 			hasNpmPackage: packageJson !== undefined,
+			packageJson: packageJson,
 			defaults: {
 				license: currentLicense,
 				author: currentAuthor,
 				project: currentProject
 			},
 			update: function(opts) {
-				if (opts.license) {
+				if (opts.force) {
+					this.defaults.license = globalDefaults.license;
+					opts.license = globalDefaults.license;
+
+				} else if (opts.license) {
 					this.defaults.license = opts.license;
 				}
+
 				if (opts.author) {
 					this.defaults.author.name = opts.author;
 				}
@@ -246,7 +256,7 @@ module.exports = {
 	writeLicense: function(license) {
 		try {
 			fs.writeFileSync(filePath, license.full, 'utf8');
-			console.log(licenseFileConfig.defaultFileName + ' created');
+			console.log(fileName + ' created');
 		} catch(err) {
 			console.log('Error writing license file', err);
 		}

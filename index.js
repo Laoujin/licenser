@@ -92,7 +92,7 @@ function setCommand() {
 		}
 
 		if (config.hasNpmPackage) {
-			if (config.license.key !== newLicense.key) {
+			if (config.packageJson.license !== newLicense.key) {
 				status.updatePackageJson(newLicense.key);
 			} else {
 				console.log('package.json up to date');
