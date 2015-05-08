@@ -95,27 +95,30 @@ var licenses = licenseModelBuilder({
 var licenseFileConfig = {
 	names: ['LICENSE', 'COPYING'],
 	exts: ['', '.md', '.txt'],
-	defaultFileName: globalDefaults.defaultFileName
+	defaultFileName: globalDefaults.defaultFileName || 'LICENSE'
 };
 
-function getLicenseFilePath() {
+function getLicenseFileName() {
 	var existing;
 	_.forEach(licenseFileConfig.names, function(name) {
 		_.forEach(licenseFileConfig.exts, function(ext) {
 			var fileName = path.join(process.cwd(), name + ext);
 			if (fs.existsSync(fileName)) {
-				existing = fileName;
+				existing = name + ext;
 			}
 		});
 	});
-	return existing || path.join(process.cwd(), licenseFileConfig.defaultFileName);
+	return existing || licenseFileConfig.defaultFileName;
 }
 
-var filePath = getLicenseFilePath();
+var fileName = getLicenseFileName();
+var filePath = path.join(process.cwd(), fileName);
 
 module.exports = {
 	getConfig: function(spdxlicenses) {
 		var config = {
+			global: globalDefaults,
+			fileName: fileName,
 			fileExists: function() {
 				return fs.existsSync(filePath);
 			},
@@ -246,6 +249,32 @@ module.exports = {
 			console.log(licenseFileConfig.defaultFileName + ' created');
 		} catch(err) {
 			console.log('Error writing license file', err);
+		}
+	},
+	setGlobal: function(opts) {
+		if (opts.author) {
+			globalDefaults.author = opts.author;
+		}
+		if (opts.email) {
+			globalDefaults.email = opts.email;
+		}
+		if (opts.license) {
+			var matched = this.getMatches(opts.license);
+			if (matched.length === 1) {
+				globalDefaults.license = matched[0];
+			} else {
+				console.log('Couldn\'t set license: ' + opts.license);
+			}
+		}
+		if (opts.defaultFileName) {
+			globalDefaults.defaultFileName = opts.defaultFileName;
+		}
+		try {
+			var globalConfigPath = path.normalize(__dirname + '/../config.json');
+			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8');
+			console.log('Global settings updated!');
+		} catch(err) {
+			console.log(err);
 		}
 	}
 };

@@ -29,7 +29,7 @@ If not author information is read from `~/.gitconfig`
 Your default license and author data can be set globally:
 ```
 $ licenser config --author="Mr. Fancy Pants" --email="fp@adventure.com"
-$ licenser config --defaultFileName="LICENSE.txt" --license=CC-BY-NC-4.0 
+$ licenser config --default-name="LICENSE.txt" --license=CC-BY-NC-4.0 
 ```
 
 

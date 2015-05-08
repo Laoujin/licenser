@@ -48,6 +48,11 @@ case 'set':
 	renderTemplate('header');
 	setCommand();
 	break;
+
+case 'config':
+	renderTemplate('header');
+	status.setGlobal(opts);
+	break;
 }
 
 function simpleLicenseListPrint(list, opts) {

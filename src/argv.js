@@ -45,6 +45,27 @@ module.exports = function(config) {
 			help: 'show OSI approved licenses'
 		});
 
+	nomnom.command('config')
+		.option('author', {
+			help: 'name to place in your licenses',
+			default: config.global.author
+		})
+		.option('email', {
+			help: 'default author email',
+			default: config.global.email
+		})
+		.option('license', {
+			help: 'your default license key (ex: MIT, CC-BY-4.0, ...)',
+			default: config.global.license
+		})
+		.option('defaultFileName', {
+			abbr: 'n',
+			full: 'default-name',
+			help: 'the default name for your license file',
+			default: config.global.defaultFileName
+		})
+		.help('set global licenser settings');
+
 	var licenseKeyHelp = 'the license key (ex: MIT, Apache2, GPL3, ...)';
 	nomnom.command('print')
 		.option('key', {
