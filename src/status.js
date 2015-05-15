@@ -18,7 +18,6 @@ var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/
 
 // read node package.json
 var packageJson;
-console.log('exists file:', packageJsonPath);
 if (fs.existsSync(packageJsonPath)) {
 	try {
 		packageJson = fs.readFileSync(packageJsonPath, 'utf8');
@@ -57,7 +56,6 @@ function getCurrentAuthor() {
 	};
 
 	var gitPath = path.join(process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE, '.gitconfig');
-	console.log('gity path:', gitPath);
 	if (fs.existsSync(gitPath)) {
 		var git = ini.parseSync(gitPath);
 		if (git.user) {
