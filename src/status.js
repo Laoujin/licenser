@@ -322,13 +322,9 @@ module.exports = {
 		}
 		try {
 			var globalConfigPath = path.normalize(__dirname + '/../config.json');
-			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8', function(err) {
-				if (err) {
-					console.log('ERR writing ' + globalConfigPath, err);
-				} else {
-					console.log('Global settings updated!');
-				}
-			});
+			console.log('Updating global settings file: ', globalConfigPath);
+			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8');
+			console.log('Global settings updated!');
 		} catch(err) {
 			console.log('ERR writing ' + globalConfigPath, err);
 		}
