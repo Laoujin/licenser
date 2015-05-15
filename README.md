@@ -12,10 +12,10 @@ $ npm install -g licenser
 ## Usage
 In your project directory root:
 ```
-# Create or update LICENSE file from package.json or from `licenser config`
+# Create or overwrite LICENSE file from package.json or from `licenser config`
 $ licenser set
 
-# Create or update LICENSE file and update package.json
+# Create or overwrite LICENSE file and update package.json
 $ licenser set apache2
 $ licenser set mit
 $ licenser set gpl3
