@@ -306,23 +306,27 @@ module.exports = {
 		var paramsGiven = false;
 		if (opts.author) {
 			globalDefaults.author = opts.author;
+			console.log('author set to ', opts.author);
 			paramsGiven = true;
 		}
 		if (opts.email) {
 			globalDefaults.email = opts.email;
+			console.log('email set to ', opts.email);
 			paramsGiven = true;
 		}
 		if (opts.license) {
 			var matched = this.getMatches(opts.license);
 			if (matched.length === 1) {
 				globalDefaults.license = matched[0];
+				console.log('lic set to ', matched[0]);
 				paramsGiven = true;
 			} else {
 				console.log('Couldn\'t set license: ' + opts.license);
 			}
 		}
-		if (opts.defaultFileName) {
+		if (opts.defaultFileName && globalDefaults.defaultFileName !== opts.defaultFileName) {
 			globalDefaults.defaultFileName = opts.defaultFileName;
+			console.log('defaultName set to ', opts.defaultFileName);
 			paramsGiven = true;
 		}
 
