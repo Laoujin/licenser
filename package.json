@@ -29,6 +29,7 @@
     "named-regexp": "^0.1.1",
     "node-ini": "^1.0.0",
     "nomnom": "^1.8.1",
+    "parse-authors": "^0.2.2",
     "spdx-license-list": "^1.1.0",
     "swig": "^1.4.2"
   },

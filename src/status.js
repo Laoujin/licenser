@@ -33,8 +33,17 @@ function getCurrentAuthor() {
 			email: globalDefaults.email
 		};
 
-	} else if (packageJson) {
-		return packageJson.author;
+	} else if (packageJson && packageJson.author) {
+		if (typeof packageJson.author === 'string') {
+			var parseAuthors = require('parse-authors');
+			var authors = parseAuthors(packageJson.author);
+			if (authors.length) {
+				return authors[0];
+			}
+
+		} else {
+			return packageJson.author;
+		}
 	}
 
 	var author = {
