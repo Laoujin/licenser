@@ -340,7 +340,8 @@ module.exports = {
 		}
 
 		try {
-			var globalConfigPath = path.normalize(process.cwd() + '/../config.json');
+			console.log('gonna write to:', __dirname);
+			var globalConfigPath = path.normalize(__dirname + '/../config.json');
 			console.log('Updating global settings file: ', globalConfigPath);
 			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8');
 			console.log('Global settings updated!');
