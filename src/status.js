@@ -303,23 +303,34 @@ module.exports = {
 		}
 	},
 	setGlobal: function(opts) {
+		var paramsGiven = false;
 		if (opts.author) {
 			globalDefaults.author = opts.author;
+			paramsGiven = true;
 		}
 		if (opts.email) {
 			globalDefaults.email = opts.email;
+			paramsGiven = true;
 		}
 		if (opts.license) {
 			var matched = this.getMatches(opts.license);
 			if (matched.length === 1) {
 				globalDefaults.license = matched[0];
+				paramsGiven = true;
 			} else {
 				console.log('Couldn\'t set license: ' + opts.license);
 			}
 		}
 		if (opts.defaultFileName) {
 			globalDefaults.defaultFileName = opts.defaultFileName;
+			paramsGiven = true;
 		}
+
+		if (paramsGiven === false) {
+			console.log('No configuration passed...? Try: licenser config --author=yourname');
+			return;
+		}
+
 		try {
 			var globalConfigPath = path.normalize(__dirname + '/../config.json');
 			console.log('Updating global settings file: ', globalConfigPath);
