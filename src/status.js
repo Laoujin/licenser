@@ -76,9 +76,8 @@ function getCurrentProject() {
 		};
 	}
 
-	var name = path.normalize(__dirname + '/../').split(path.sep);
-	assert(name[name.length -1] === '');
-	name = name[name.length - 2];
+	var name = process.cwd().split(path.sep);
+	name = name[name.length -1] === '' ? name[name.length - 2] : name[name.length - 1];
 	return {
 		years: new Date().getFullYear(),
 		name: name,
