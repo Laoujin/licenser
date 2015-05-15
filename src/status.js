@@ -326,6 +326,8 @@ module.exports = {
 			paramsGiven = true;
 		}
 
+		console.log('what is this sh*...', paramsGiven, paramsGiven === false, globalDefaults);
+
 		if (paramsGiven === false) {
 			console.log('No configuration passed...? Try: licenser config --author=yourname');
 			return;
