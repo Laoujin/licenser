@@ -13,7 +13,6 @@ var ini = require('node-ini');
 
 var globalConfigPath = path.normalize(__dirname + '/../config.json');
 
-//var globalDefaults = require('../config.json');
 var globalDefaults = jsonFile.readFileSync(globalConfigPath);
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
