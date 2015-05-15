@@ -303,30 +303,34 @@ module.exports = {
 		}
 	},
 	setGlobal: function(opts) {
+		function getVerb(wasSame) {
+			return !wasSame ? 'set to' : 'was already';
+		}
+
 		var paramsGiven = false;
 		if (opts.author) {
+			console.log('Default author name ' + getVerb(globalDefaults.author === opts.author), opts.author);
 			globalDefaults.author = opts.author;
-			console.log('Default author name set to ', opts.author);
 			paramsGiven = true;
 		}
 		if (opts.email) {
+			console.log('Default author email ' + getVerb(globalDefaults.email === opts.email), opts.email);
 			globalDefaults.email = opts.email;
-			console.log('Default author email set to ', opts.email);
 			paramsGiven = true;
 		}
 		if (opts.license) {
 			var matched = this.getMatches(opts.license);
 			if (matched.length === 1) {
+				console.log('Default license ' + getVerb(globalDefaults.license === opts.license), matched[0]);
 				globalDefaults.license = matched[0];
-				console.log('Default license set to ', matched[0]);
 				paramsGiven = true;
 			} else {
 				console.log('Couldn\'t set license: ' + opts.license);
 			}
 		}
-		if (opts.defaultFileName && globalDefaults.defaultFileName !== opts.defaultFileName) {
+		if (opts.defaultFileName) {
+			console.log('Default license filename ' + getVerb(globalDefaults.defaultFileName === opts.defaultFileName), opts.defaultFileName);
 			globalDefaults.defaultFileName = opts.defaultFileName;
-			console.log('Default license filename set to ', opts.defaultFileName);
 			paramsGiven = true;
 		}
 
