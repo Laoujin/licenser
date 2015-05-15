@@ -120,6 +120,11 @@ function transformCopyrightMatcher(licenseText) {
 
 function setCommand() {
 	var licenseKey = opts.license;
+	if (!licenseKey) {
+		console.log('No license key given and no global license set.');
+		return;
+	}
+
 	var matched = status.getMatches(licenseKey);
 	if (matched.length === 1) {
 		licenseKey = matched[0];
