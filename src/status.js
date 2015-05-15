@@ -5,12 +5,16 @@ var _ = require('lodash');
 var colors = require('colors/safe');
 var fs = require('fs');
 var path = require('path');
-var jsonFile = require('json-file-plus');
+var jsonFilePlus = require('json-file-plus');
+var jsonFile = require('jsonfile');
 var packageJsonPath = path.join(process.cwd(), 'package.json');
 var assert = require('assert');
 var ini = require('node-ini');
 
-var globalDefaults = require('../config.json');
+var globalConfigPath = path.normalize(__dirname + '/../config.json');
+
+//var globalDefaults = require('../config.json');
+var globalDefaults = jsonFile.readFileSync(globalConfigPath);
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
 // read node package.json
@@ -261,7 +265,7 @@ module.exports = {
 		return lic;
 	},
 	updatePackageJson: function(licenseKey) {
-		jsonFile(packageJsonPath, function (err, file) {
+		jsonFilePlus(packageJsonPath, function (err, file) {
 			file.set({
 				license: licenseKey
 			});
@@ -340,8 +344,6 @@ module.exports = {
 		}
 
 		try {
-			console.log('gonna write to:', __dirname);
-			var globalConfigPath = path.normalize(__dirname + '/../config.json');
 			console.log('Updating global settings file: ', globalConfigPath);
 			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8');
 			console.log('Global settings updated!');
