@@ -27,13 +27,7 @@ if (fs.existsSync(packageJsonPath)) {
 }
 
 function getCurrentAuthor() {
-	if (globalDefaults.author) {
-		return {
-			name: globalDefaults.author,
-			email: globalDefaults.email
-		};
-
-	} else if (packageJson && packageJson.author) {
+	if (packageJson && packageJson.author) {
 		if (typeof packageJson.author === 'string') {
 			var parseAuthors = require('parse-authors');
 			var authors = parseAuthors(packageJson.author);
@@ -44,6 +38,13 @@ function getCurrentAuthor() {
 		} else {
 			return packageJson.author;
 		}
+	}
+
+	if (globalDefaults.author) {
+		return {
+			name: globalDefaults.author,
+			email: globalDefaults.email
+		};
 	}
 
 	var author = {
