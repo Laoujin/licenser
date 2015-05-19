@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-'use strict';
+'use strict'; 
 
 var _ = require('lodash');
 var colors = require('colors/safe');
