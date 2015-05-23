@@ -61,9 +61,14 @@ case 'config':
 }
 
 function simpleLicenseListPrint(list, opts) {
-	_.forEach(list, function(lic) {
-		simpleLicensePrint(lic, opts.all);
-	});
+	if (list.length !== 0) {
+		_.forEach(list, function(lic) {
+			simpleLicensePrint(lic, opts.all);
+		});
+		console.log('\nExample usage: `licenser set ' + list[list.length - 1].key + '`');
+	} else {
+		console.log('No licenses matched ' + opts.searchFor);
+	}
 }
 
 function simpleLicensePrint(lic, addOsiApproved) {

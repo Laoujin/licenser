@@ -1,6 +1,9 @@
 {% if !license.key %}
 No license has been set!
-Try `licenser list` or `licenser set GPL-3.0`
+
+
+Try `licenser list` or `licenser set GPL3`
+or `licenser -h` for more options
 {%- else %}
 Your license: {{ license.key }}
 {%- if !license.valid %}
