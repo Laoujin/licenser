@@ -145,10 +145,14 @@ module.exports = {
 				project: currentProject
 			},
 			update: function(opts) {
-				if (opts.force) {
+				if (opts._[0] === 'set' && opts._[1] !== undefined) {
+					this.defaults.license = opts.license;
+				} else if (opts.global) {
 					this.defaults.license = globalDefaults.license;
 					opts.license = globalDefaults.license;
+				}
 
+				if (opts.global) {
 					if (opts._[0] === 'set' && fileName !== licenseFileConfig.defaultFileName) {
 						// Zie uglyness
 						fs.unlinkSync(filePath);
@@ -157,9 +161,6 @@ module.exports = {
 						config.fileName = fileName;
 						filePath = path.join(process.cwd(), fileName);
 					}
-
-				} else if (opts.license) {
-					this.defaults.license = opts.license;
 				}
 
 				if (opts.author) {

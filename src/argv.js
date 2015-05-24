@@ -94,10 +94,10 @@ module.exports = function(config) {
 			help: licenseKeyHelp,
 			default: config.defaults.license
 		})
-		.option('force', {
-			abbr: 'f',
+		.option('global', {
+			abbr: 'g',
 			flag: true,
-			help: 'overwrite package.json and/or file with your global licenser configuration'
+			help: 'overwrite package.json license and/or file with your global licenser configuration'
 		})
 		// .option('readme', {
 		// 	flag: true,

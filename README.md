@@ -34,7 +34,9 @@ Your default license and author data can be set globally:
 $ licenser config --author="Mr. Fancy Pants" --email="fp@adventure.com"
 $ licenser config --default-name="LICENSE.txt" --license=CC-BY-NC-4.0
 
-$ licenser set -f # would overwrite the package.json and file with the `licenser config` values
+# To overwrite the package.json and file with the `licenser config` values  
+# ATTN: Does not overwrite author(s) in package.json  
+$ licenser set -g
 ```
 You can also edit `config.json` directly.
 
