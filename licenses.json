@@ -2,36 +2,26 @@
 	"AFL-1.1": {
 		"alias": "^AFL[- ]?1[- .]1$",
 		"family": "AFL",
-		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author",
 		"recognize": "Licensed under the Academic Free License version 1.1."
 	},
 	"AFL-1.2": {
 		"alias": "^AFL[- ]?1[- .]2$",
 		"family": "AFL",
-		"match": "Copyright \\(C\\) (:<years>2002) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author",
 		"recognize": "Licensed under the Academic Free License version 1.2 "
 	},
 	"AFL-2.0": {
 		"alias": "^AFL[- ]?2$",
 		"family": "AFL",
-		"match": "Copyright \\(C\\) (:<years>2003) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author",
 		"recognize": "Licensed under the Academic Free License version 2.0 "
 	},
 	"AFL-2.1": {
 		"alias": "^AFL[- ]?2[- .]1$",
 		"family": "AFL",
-		"match": "Copyright \\(C\\) (:<years>2003-2004) (:<author>Lawrence E. Rosen)",
-		"replace": "Copyright (C) $years $author",
 		"recognize": "Licensed under the Academic Free License version 2.1  "
 	},
 	"AFL-3.0": {
 		"alias": "^AFL[- ]?3$",
 		"family": "AFL",
-		"match": "Copyright © (:<years>2005) (:<author>Lawrence Rosen)",
-		"replace": "Copyright © $years $author",
 		"recognize": "Licensed under the Academic Free License version 3.0  "
 	},
 	"AGPL-1.0": {
