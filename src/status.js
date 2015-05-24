@@ -299,43 +299,45 @@ module.exports = {
 		}
 	},
 	setGlobal: function(opts) {
-		function getVerb(wasSame) {
-			return !wasSame ? 'set to' : 'was already';
-		}
+		var beforeConfig = JSON.stringify(globalDefaults, null, 3);
+		console.log('Current global configuration:');
+		console.log(beforeConfig);
 
-		var paramsGiven = false;
 		if (opts.author) {
-			console.log('Default author name ' + getVerb(globalDefaults.author === opts.author), opts.author);
 			globalDefaults.author = opts.author;
-			paramsGiven = true;
 		}
 		if (opts.email) {
-			console.log('Default author email ' + getVerb(globalDefaults.email === opts.email), opts.email);
 			globalDefaults.email = opts.email;
-			paramsGiven = true;
 		}
 		if (opts.license) {
 			var matched = this.getMatches(opts.license);
 			if (matched.length === 1) {
-				console.log('Default license ' + getVerb(globalDefaults.license === opts.license), matched[0]);
 				globalDefaults.license = matched[0];
-				paramsGiven = true;
 			} else {
-				console.log('Couldn\'t set license: ' + opts.license);
+				console.log();
+				console.log(colors.magenta('Couldn\'t set license: ' + opts.license + (matched.length === 0 ? ' (Unrecognized license)' : ' (Multiple licenses matched your input)')));
 			}
 		}
 		if (opts.defaultFileName) {
-			console.log('Default license filename ' + getVerb(globalDefaults.defaultFileName === opts.defaultFileName), opts.defaultFileName);
 			globalDefaults.defaultFileName = opts.defaultFileName;
-			paramsGiven = true;
 		}
 
-		if (paramsGiven === false) {
-			console.log('No configuration passed...? Try: licenser config --author=yourname');
+		var afterConfig = JSON.stringify(globalDefaults, null, 3);
+		console.log();
+
+		if (beforeConfig === afterConfig) {
+			console.log(colors.magenta('No configuration passed...?'));
+			console.log('\nUsage:\n`licenser config --author=\"Your Name\"`');
+			console.log('`licenser config --default-name=LICENSE.txt`');
 			return;
+
+		} else {
+			console.log(colors.yellow('Updated global configuration:'));
+			console.log(colors.yellow(afterConfig));
 		}
 
 		try {
+			console.log();
 			console.log('Updating global settings file: ', globalConfigPath);
 			fs.writeFileSync(globalConfigPath, JSON.stringify(globalDefaults, null, 2), 'utf8');
 			console.log('Global settings updated!');
