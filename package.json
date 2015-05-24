@@ -35,9 +35,6 @@
     "swig": "^1.4.2"
   },
   "devDependencies": {
-    "gulp": "^3.8.11",
-    "gulp-jasmine": "^2.0.1",
-    "jasmine": "^2.3.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

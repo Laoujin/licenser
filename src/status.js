@@ -1,22 +1,22 @@
 'use strict';
 
 // Get current license(s) & file status etc
+
 var _ = require('lodash');
 var colors = require('colors/safe');
 var fs = require('fs');
 var path = require('path');
 var jsonFilePlus = require('json-file-plus');
 var jsonFile = require('jsonfile');
-var packageJsonPath = path.join(process.cwd(), 'package.json');
 var assert = require('assert');
 var ini = require('node-ini');
 
 var globalConfigPath = path.normalize(__dirname + '/../config.json');
-
 var globalDefaults = jsonFile.readFileSync(globalConfigPath);
 var spdxLicensesPath = __dirname + '/../node_modules/spdx-license-list/licenses/';
 
 // read node package.json
+var packageJsonPath = path.join(process.cwd(), 'package.json');
 var packageJson;
 if (fs.existsSync(packageJsonPath)) {
 	try {
@@ -102,11 +102,7 @@ var currentAuthor = getCurrentAuthor();
 var currentProject = getCurrentProject();
 
 // Combine license jsons
-var licenseModelBuilder = require('./licenseModelBuilder.js');
-var licenses = licenseModelBuilder({
-	spdx: require('spdx-license-list'),
-	common: require('../licenses.json')
-});
+var licenses = _.merge(require('spdx-license-list'), require('../licenses.json'));
 
 var licenseFileConfig = {
 	names: ['LICENSE', 'COPYING'],

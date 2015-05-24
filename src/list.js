@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash');
-var status = require('../status.js');
+var status = require('./status.js');
 
 module.exports = function(licenses, opts) {
 	if (opts.searchFor) {

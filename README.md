@@ -27,7 +27,7 @@ $ licenser update
 ## Config
 If a `package.json` is present at the working directory, author,
 project and license information is read from there.  
-If not author information is read from `~/.gitconfig`
+If not, author information is read from `~/.gitconfig`
 
 Your default license and author data can be set globally:
 ```

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-'use strict'; 
+'use strict';
 
 var _ = require('lodash');
 var colors = require('colors/safe');
@@ -26,7 +26,7 @@ config.update(opts);
 switch (opts._[0]) {
 case 'list':
 	renderTemplate('header');
-	var list = toArray(require('./src/lic/list.js')(config.licenses, opts));
+	var list = toArray(require('./src/list.js')(config.licenses, opts));
 	if (opts.common) {
 		var model = {
 			opts: opts,
